@@ -1,0 +1,574 @@
+<div class="main_wrap">
+  <ul class="report-tab-wrap" style="display: block">
+    <li
+      class="report-tab"
+      id="reportType_sportsBook"
+      [class.select]="selectedTabIndex === 0"
+      (click)="selectTab(0)"
+    >
+      Import
+    </li>
+    <li
+      class="report-tab"
+      id="reportType_exchange"
+      [class.select]="selectedTabIndex === 1"
+      (click)="selectTab(1)"
+    >
+      Inplay
+    </li>
+
+    <li
+      class="report-tab"
+      id="reportType_casino"
+      [class.select]="selectedTabIndex === 2"
+      (click)="selectTab(2)"
+    >
+      Upcoming
+    </li>
+
+  </ul>
+  <div class="function-wrap">
+    <ul class="input-list">
+      <li id="eventRadioBtnList">
+        <input
+          type="radio"
+          name="events"
+          id="events_1"
+          data-eventtype="1"
+          (change)="changeGender($event)"
+          value=""
+        />
+        All
+        <input
+          type="radio"
+          name="events"
+          id="events_1"
+          data-eventtype="1"
+          (change)="changeGender($event)"
+          value="1"
+        />
+        Soccer
+        <input
+          type="radio"
+          name="events"
+          id="events_2"
+          data-eventtype="2"
+          (change)="changeGender($event)"
+          value="2"
+        />
+        Tennis
+        <input
+          type="radio"
+          name="events"
+          id="events_4"
+          data-eventtype="4"
+          (change)="changeGender($event)"
+          value="4"
+        />
+        Cricket
+      </li>
+
+      <li class="import-button">
+        <button class="btn-send" (click)="onActiveGame()">Import</button>
+      </li>
+    </ul>
+  </div>
+</div>
+<div class="main_wrap">
+  <table
+    *ngIf="selectedTabIndex === 1"
+    id="table_DL"
+    class="table01 table-pt"
+    style=""
+  >
+    <tbody>
+      <tr id="head">
+        <th width="3%"></th>
+        <th width="2%" class="align-C">
+          <input type="checkbox" name="select_all" id="select_all" />
+        </th>
+        <th id="market_info" class="align-C">Market Info</th>
+        <th width="5%" class="align-C">Status</th>
+        <th width="5%" class="align-C">TV</th>
+        <th width="5%" class="align-C">Time</th>
+
+        <th id="" width="5%" class="align-C">Bet</th>
+        <th id="" width="8%" class="align-C">Is Inplay</th>
+        <th id="" width="8%" class="align-C">User Online</th>
+        <th id="" width="8%" class="align-C">No of bets</th>
+        <th id="" width="8%" class="align-C">Session</th>
+        <th id="" width="8%" class="align-C">Action</th>
+        <th width="6%" class="align-C">Reverse</th>
+      </tr>
+    </tbody>
+    <tbody id="content">
+      <ng-container *ngFor="let event of activeGames">
+        <tr id="event_{{ event.eventId }}" *ngIf="event.isInPlay === 1">
+          <td class="align-C">
+            <a (click)="toggleEventStatus(event)" *ngIf="event.status === 1; else suspendTemp">
+              <i class="fa fa-play-circle fa-2x"></i>
+            </a>
+            <ng-template #suspendTemp>
+              <a (click)="toggleEventStatus(event)">
+                <i class="fa fa-pause-circle fa-2x loss-text"></i>
+              </a>
+            </ng-template>
+          </td>
+          <td class="align-C">
+            <input type="checkbox" name="select" id="select" />
+          </td>
+          <td class="align-L">
+            <a
+              class="expand-close"
+              (click)="toggleExpand($event, 'sub_' + event.eventId)"
+            ></a>
+            {{ event.eventName }}
+          </td>
+          <td id="status_{{ event.eventId }}" class="align-C">
+            <label class="xyz">
+              <input type="checkbox" [(ngModel)]="event.status" /><span
+                class="slider round"
+              ></span
+            ></label>
+          </td>
+          <td id="tv_{{ event.eventId }}" class="align-C">
+            <span class="red">{{ event.tv }} </span>
+          </td>
+          <td id="time_{{ event.eventId }}" class="align-C">
+            <span class="red">{{ event.time }} </span>
+          </td>
+
+          <td id="bet_{{ event.eventId }}" class="align-C">
+            <input
+              type="checkbox"
+              [(ngModel)]="event.bet"
+              id="bet"
+            />
+          </td>
+          <td id="isinplay_{{ event.eventId }}" class="align-C">
+            <input
+              type="checkbox"
+              [(ngModel)]="event.isInPlay"
+              id="bet"
+            />
+          </td>
+          <td id="user_online_{{ event.eventId }}" class="align-C">
+            {{ event.usersOnline }}
+          </td>
+          <td id="no_bet_{{ event.eventId }}" class="align-C">
+            {{ event.noOfBets }}
+          </td>
+          <td id="session_{{ event.eventId }}" class="align-C">
+            A<input
+              type="radio"
+              [(ngModel)]="event.session"
+              name="sesssion_{{ event.eventId }}"
+              id="session__{{ event.eventId }}"
+              value="A"
+            />
+            M<input
+              type="radio"
+              [(ngModel)]="event.session"
+              name="session_{{ event.eventId }}"
+              id="session__{{ event.eventId }}"
+              value="M"
+            />
+          </td>
+          <td id="action_{{ event.eventId }}" class="align-C">
+            <button class="btn">BS</button>
+          </td>
+          <td id="reverse_{{ event.eventId }}" class="align-C">
+            <button class="align-C btn">Reverse</button>
+          </td>
+        </tr>
+        <tr id="sub_{{ event.eventId }}" class="expand first" style="display: none">
+          <td colspan="2"></td>
+          <td colspan="14">
+            <ng-container *ngFor="let market of event.markets; index as i">
+              <div class="market">
+                <a
+                  *ngIf="market.runners && market.runners.length"
+                  class="expand-close"
+                  (click)="toggleMarkets($event, 'market_' + event.eventId + '_' + i)"
+                ></a>
+                {{ market.marketName }}
+                <span class="spacer"></span>
+                <button class="btn">R</button>
+              </div>
+              <div
+                *ngIf="market.runners && market.runners.length"
+                id="market_{{ event.eventId }}_{{ i }}"
+                class="markets"
+                style="display: none"
+              >
+                <div *ngFor="let m of market.runners" class="market sub_market">
+                  {{ m }}
+                  <span class="spacer"></span>
+                  <button class="btn">
+                    <i class="fa fa-plus-circle" aria-hidden="true"></i>
+                  </button>
+                </div>
+              </div>
+            </ng-container>
+          </td>
+        </tr>
+      </ng-container>
+    </tbody>
+  </table>
+
+  <table
+    *ngIf="selectedTabIndex === 2"
+    id="table_DL"
+    class="table01 table-pt"
+    style=""
+  >
+    <tbody>
+      <tr id="head">
+        <th width="3%"></th>
+        <th width="2%" class="align-C">
+          <input type="checkbox" name="select_all" id="select_all" />
+        </th>
+        <th id="market_info" class="align-C">Market Info</th>
+        <th width="5%" class="align-C">Status</th>
+        <th width="5%" class="align-C">TV</th>
+        <th width="5%" class="align-C">Time</th>
+
+        <th id="" width="5%" class="align-C">Bet</th>
+        <th id="" width="8%" class="align-C">Is Inplay</th>
+        <th id="" width="8%" class="align-C">User Online</th>
+        <th id="" width="8%" class="align-C">No of bets</th>
+        <th id="" width="8%" class="align-C">Session</th>
+        <th id="" width="8%" class="align-C">Action</th>
+        <th width="6%" class="align-C">Reverse</th>
+      </tr>
+    </tbody>
+    <tbody id="content">
+      <ng-container *ngFor="let event of activeGames">
+        <tr id="event_{{ event.eventId }}" *ngIf="event.isInPlay === 0">
+          <td class="align-C">
+            <a (click)="toggleEventStatus(event)" *ngIf="event.status === 1; else suspendTemp">
+              <i class="fa fa-play-circle fa-2x"></i>
+            </a>
+            <ng-template #suspendTemp>
+              <a (click)="toggleEventStatus(event)">
+                <i class="fa fa-pause-circle fa-2x loss-text"></i>
+              </a>
+            </ng-template>
+          </td>
+          <td class="align-C">
+            <input type="checkbox" name="select" id="select" />
+          </td>
+          <td class="align-L">
+            <a
+              class="expand-close"
+              (click)="toggleExpand($event, 'sub_' + event.eventId)"
+            ></a>
+            {{ event.eventName }}
+          </td>
+          <td id="status_{{ event.eventId }}" class="align-C">
+            <label class="xyz">
+              <input type="checkbox" [(ngModel)]="event.status" /><span
+                class="slider round"
+              ></span
+            ></label>
+          </td>
+          <td id="tv_{{ event.eventId }}" class="align-C">
+            <span class="red">{{ event.tv }} </span>
+          </td>
+          <td id="time_{{ event.eventId }}" class="align-C">
+            <span class="red">{{ event.time }} </span>
+          </td>
+
+          <td id="bet_{{ event.eventId }}" class="align-C">
+            <input
+              type="checkbox"
+              [(ngModel)]="event.bet"
+              id="bet"
+            />
+          </td>
+          <td id="isinplay_{{ event.eventId }}" class="align-C">
+            <input
+              type="checkbox"
+              [(ngModel)]="event.isInPlay"
+              id="bet"
+            />
+          </td>
+          <td id="user_online_{{ event.eventId }}" class="align-C">
+            {{ event.usersOnline }}
+          </td>
+          <td id="no_bet_{{ event.eventId }}" class="align-C">
+            {{ event.noOfBets }}
+          </td>
+          <td id="session_{{ event.eventId }}" class="align-C">
+            A<input
+              type="radio"
+              [(ngModel)]="event.session"
+              name="sesssion_{{ event.eventId }}"
+              id="session__{{ event.eventId }}"
+              value="A"
+            />
+            M<input
+              type="radio"
+              [(ngModel)]="event.session"
+              name="session_{{ event.eventId }}"
+              id="session__{{ event.eventId }}"
+              value="M"
+            />
+          </td>
+          <td id="action_{{ event.eventId }}" class="align-C">
+            <button class="btn">BS</button>
+          </td>
+          <td id="reverse_{{ event.eventId }}" class="align-C">
+            <button class="align-C btn">Reverse</button>
+          </td>
+        </tr>
+        <tr id="sub_{{ event.eventId }}" class="expand first" style="display: none">
+          <td colspan="2"></td>
+          <td colspan="14">
+            <ng-container *ngFor="let market of event.markets; index as i">
+              <div class="market">
+                <a
+                  *ngIf="market.runners && market.runners.length"
+                  class="expand-close"
+                  (click)="toggleMarkets($event, 'market_' + event.eventId + '_' + i)"
+                ></a>
+                {{ market.marketName }}
+                <span class="spacer"></span>
+                <button class="btn">R</button>
+              </div>
+              <div
+                *ngIf="market.runners && market.runners.length"
+                id="market_{{ event.eventId }}_{{ i }}"
+                class="markets"
+                style="display: none"
+              >
+                <div *ngFor="let m of market.runners" class="market sub_market">
+                  {{ m }}
+                  <span class="spacer"></span>
+                  <button class="btn">
+                    <i class="fa fa-plus-circle" aria-hidden="true"></i>
+                  </button>
+                </div>
+              </div>
+            </ng-container>
+          </td>
+        </tr>
+      </ng-container>
+    </tbody>
+  </table>
+
+  <ng-template [ngIf]="selectedTabIndex === 0">
+    <table class="table01 table-pt">
+      <tbody class="header">
+        <tr>
+          <th class="header align-C" colspan="4" rowspan="2">
+            Sport Name
+            <button class="add-button" (click)="openSportModal()">
+              <i class="fa fa-plus-circle fa-2x" aria-hidden="true"></i>
+            </button>
+          </th>
+
+          <th class="header align-C" colspan="4" rowspan="2">
+            Tournament
+            <button class="add-button" (click)="openTourModal()">
+              <i class="fa fa-plus-circle fa-2x" aria-hidden="true"></i>
+            </button>
+          </th>
+
+          <th class="header align-C" colspan="4" rowspan="2">
+            Matches
+            <button class="add-button" (click)="openMatchModal()">
+              <i class="fa fa-plus-circle fa-2x" aria-hidden="true"></i>
+            </button>
+          </th>
+
+          <th class="header align-C" colspan="4">
+            Bets
+            <button class="add-button" (click)="openBetModal()">
+              <i class="fa fa-plus-circle fa-2x" aria-hidden="true"></i>
+            </button>
+          </th>
+        </tr>
+
+        <tr class="ng-scope">
+          <td class="align-C">Match</td>
+          <td class="align-C">Match Date</td>
+          <td class="align-C">Status</td>
+          <td class="align-C">BF status</td>
+        </tr>
+      </tbody>
+      <tbody>
+        <tr *ngFor="let event of eventsLists">
+          <td width="2%" class="align-C">
+            <input type="checkbox" [(ngModel)]="event.activeStatus"/>
+          </td>
+          <td width="2%" class="ng-scope" class="align-C">
+          </td>
+          <td class="align-C">{{ event.sportsName }}</td>
+          <td width="2%" class="align-C">
+          </td>
+          <td width="2%" class="align-C">
+          </td>
+          <td class="ng-scope" width="2%" class="align-C">
+          </td>
+          <td class="align-C">{{ event.competitionName }}</td>
+          <td width="2%" class="align-C">
+          </td>
+          <td width="2%" class="align-C">
+          </td>
+          <td width="2%" class="align-C" class="ng-scope">
+          </td>
+          <td class="align-C">{{ event.eventName }}</td>
+          <td width="2%" class="align-C">
+          </td>
+          <td class="align-C">{{ event.eventName }}</td>
+          <td class="align-C">{{ event.time }}</td>
+          <td title="Status" class="align-C">
+            <label class="xyz">
+              <input type="checkbox" [(ngModel)]="event.status" /><span
+                class="slider round"
+              ></span
+            ></label>
+          </td>
+
+          <td>open</td>
+        </tr>
+      </tbody>
+    </table>
+  </ng-template>
+</div>
+
+<app-modal [(open)]="isSportModalOpen">
+  <div class="modal-header">
+    <h3>Sport Detail</h3>
+  </div>
+  <div class="modal-content">
+    <div class="grid grid-col-2">
+      <input type="text" class="input" placeholder="Sport Name" />
+
+      <input type="file" class="input" />
+
+      <input type="text" class="input" placeholder="Betfair ID" />
+    </div>
+    <div class="form-group">
+      <input type="checkbox" name="active" id="active" /> Is Active
+    </div>
+  </div>
+  <div class="modal-footer">
+    <button class="btn-send">Save</button>
+  </div>
+</app-modal>
+
+<app-modal [(open)]="isTourModalOpen">
+  <div class="modal-header">
+    <h3>Tournament Detail</h3>
+  </div>
+  <div class="modal-content">
+    <div class="grid grid-col-2">
+      <select name="sport" id="sport">
+        <option value="">Select Sport</option>
+        <option value="cricket">Cricket</option>
+        <option value="soccer">Soccer</option>
+        <option value="tennis">Tennis</option>
+      </select>
+      <input type="text" class="input" placeholder="Tournament Name" />
+
+      <input type="text" class="input" placeholder="Betfair ID" />
+    </div>
+    <div class="form-group">
+      <input type="checkbox" name="active" id="active" /> Is Active
+    </div>
+  </div>
+  <div class="modal-footer">
+    <button class="btn-send">Save</button>
+  </div>
+</app-modal>
+
+<app-modal [(open)]="isMatchModalOpen">
+  <div class="modal-header">
+    <h3>Match Detail</h3>
+  </div>
+  <div class="modal-content">
+    <div class="grid grid-col-2">
+      <select name="sport" id="sport">
+        <option value="">Select Sport</option>
+        <option value="cricket">Cricket</option>
+        <option value="soccer">Soccer</option>
+        <option value="tennis">Tennis</option>
+      </select>
+      <select name="tournament" id="tournament">
+        <option value="">Select Tournament</option>
+        <option value="ipl">Indian Premier League</option>
+        <option value="soccer">Australian Women's Cup</option>
+      </select>
+      <input type="text" class="input" placeholder="Match name" />
+
+      <input type="text" class="input" placeholder="Betfair ID" />
+
+      <div>
+        <input
+          class="cal-input"
+          type="text"
+          placeholder="YYYY-MM-DD"
+          [(ngModel)]="fromDate"
+          [dpDayPicker]="dateConfig"
+          [theme]="'dp-material'"
+          [mode]="'day'"
+          autocomplete="off"
+        />
+      </div>
+
+      <select name="status" id="status">
+        <option value="">Select Status</option>
+        <option value="1">Open</option>
+        <option value="2">Closed</option>
+        <option value="3">Settled</option>
+        <option value="4">Inactive</option>
+      </select>
+    </div>
+    <div class="form-group">
+      <input type="checkbox" name="active" id="active" /> Is Active
+    </div>
+  </div>
+  <div class="modal-footer">
+    <button class="btn-send">Save</button>
+  </div>
+</app-modal>
+
+<app-modal [(open)]="isBetModalOpen">
+  <div class="modal-header">
+    <h3>Bet Detail</h3>
+  </div>
+  <div class="modal-content">
+    <div class="grid grid-col-2">
+      <select name="sport" id="sport">
+        <option value="">Select Sport</option>
+        <option value="cricket">Cricket</option>
+        <option value="soccer">Soccer</option>
+        <option value="tennis">Tennis</option>
+      </select>
+
+      <select name="tournament" id="tournament">
+        <option value="">Select Tournament</option>
+        <option value="ipl">Indian Premier League</option>
+        <option value="soccer">Australian Women's Cup</option>
+      </select>
+
+      <select name="match" id="match">
+        <option value="">Select Match</option>
+        <option value="1">Sri Lanka v Bangladesh</option>
+        <option value="2">Australia v India</option>
+        <option value="3">India v Sri Lanka</option>
+      </select>
+
+      <input type="text" placeholder="Bet Name" />
+      <input type="text" placeholder="Betfair ID" />
+    </div>
+    <div class="form-group"><input type="checkbox" /> Is Active</div>
+    <div class="form-group"><input type="checkbox" /> Is Bet Allow</div>
+    <div class="form-group"><input type="checkbox" /> Is Allow Limit</div>
+  </div>
+  <div class="modal-footer">
+    <button class="btn-send">Save</button>
+  </div>
+</app-modal>

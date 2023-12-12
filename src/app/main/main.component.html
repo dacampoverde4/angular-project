@@ -1,0 +1,11 @@
+<app-header></app-header>
+<router-outlet></router-outlet>
+
+<div class="over-wrap" style="display: none" [style.display]="loading? 'block': 'none'">
+  <div id="loading" class="loading-wrap">
+    <ul class="loading">
+      <li><img src="assets/images/loading40.gif" /></li>
+      <li>Loading...</li>
+    </ul>
+  </div>
+</div>

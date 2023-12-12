@@ -1,0 +1,286 @@
+<div class="top">
+  <div class="header">
+    <h1><a routerLink="/">Skysports365</a></h1>
+    <span class="time_zone">
+      <span> {{ dateTime | date: "medium" }} </span>
+    </span>
+    <span>
+      <input type="text" placeholder="Search">
+      <button class="btn">Search</button>
+    </span>
+    <div class="spacer"></div>
+    <ul class="account-wrap">
+      <li><span class="lv_{{currentUser?.userType}}"></span><strong>{{currentUser?.userName}} </strong></li>
+      <li class="playpause play">
+        <a id="playpause">
+          <i class="fa fa-play"></i>
+        </a>
+      </li>
+      <li>Main <strong id="mainBalance">PTH {{currentUser?.balance}}</strong></li>
+      <li id="topRefreshIcon" style="display: none">
+        <img class="refresh-bar" src="assets/images/transparent.gif" />
+      </li>
+      <li class="head-refresh" title="Hard Refresh">
+        <a id="topRefresh" class="a-refresh" style="cursor: pointer">
+          <img src="assets/images/transparent.gif" />
+        </a>
+      </li>
+      <li class="logout" title="Logout">
+        <button id="logout" (click)="logout()"><img src="assets/images/transparent.gif" /></button>
+      </li>
+    </ul>
+  </div>
+
+  <!-- Menu Wrap -->
+  <div class="menu-wrap">
+    <div class="main_wrap">
+      <ul class="menu">
+        <li>
+          <a
+            id="menu_downline_list"
+            routerLink="/analysis"
+            routerLinkActive="select"
+            [class.select]="router.url.includes('/analysis')"
+            >Analysis
+          </a>
+        </li>
+        <li>
+          <a
+            id="menu_my_report"
+            class="menu-drop"
+            [class.select]="router.url.includes('/users') || router.url.includes('/memberList')"
+            >Users
+          </a>
+          <ul>
+            <ng-container *ngFor="let level of hierarchyList">
+              <li>
+                <a routerLink="/users/{{ level.id }}">
+                  {{ level.name | titlecase }}
+                </a>
+              </li>
+            </ng-container>
+          </ul>
+        </li>
+        <li>
+          <a routerLink="/settings" routerLinkActive="select">Settings</a>
+        </li>
+        <!-- <li>
+          <a
+            id="menu_downline_list"
+            routerLink="/downline"
+            routerLinkActive="select"
+            [class.select]="
+              router.url.includes('/memberList') ||
+              router.url.includes('/downline')
+            "
+            >Downline List
+          </a>
+        </li> -->
+
+        <li>
+          <a
+            id="menu_my_account"
+            class=""
+            routerLink="/my-account"
+            [class.select]="router.url.includes('my-account')"
+            >My Account
+          </a>
+        </li>
+
+        <li>
+          <a
+            id="menu_my_report"
+            class="menu-drop"
+            [class.select]="router.url.includes('/reports')"
+            >My Report
+          </a>
+          <ul>
+            <li>
+              <a routerLink="/reports/pl-downline" target="_blank"
+                >Profit/Loss Report by Downline
+              </a>
+            </li>
+            <li>
+              <a routerLink="/reports/pl-market" target="_blank"
+                >Profit/Loss Report by Market
+              </a>
+            </li>
+
+            <li>
+              <a routerLink="/reports/loginlogout" target="_blank"
+                >Login Logout Report
+              </a>
+            </li>
+            <li>
+              <a routerLink="/reports/transfer-statement" target="_blank"
+                >Transfer Statement
+              </a>
+            </li>
+            <li>
+              <a routerLink="/reports/reject-bet-history" target="_blank"
+                >Reject Bet History
+              </a>
+            </li>
+            <li>
+              <a routerLink="/reports/void-bets" target="_blank">Void Bets </a>
+            </li>
+            <li>
+              <a routerLink="/reports/new-accounts" target="_blank"
+                >Recently Created Account
+              </a>
+            </li>
+          </ul>
+        </li>
+
+        <li>
+          <a
+            id="menu_bet_list"
+            class=""
+            routerLink="/bet-list/bet-list"
+            routerLinkActive="select"
+            >BetList
+          </a>
+        </li>
+
+        <li>
+          <a
+            id="menu_bet_list_live"
+            class=""
+            routerLink="/bet-list/bet-list-live"
+            routerLinkActive="select"
+            >BetListLive
+          </a>
+        </li>
+
+        <li>
+          <a
+            id="menu_risk_management"
+            class=""
+            routerLink="/risk-management"
+            routerLinkActive="select"
+            >Risk Management
+          </a>
+        </li>
+
+        <li>
+          <a
+            id="menu_banking"
+            class=""
+            routerLink="/banking"
+            routerLinkActive="select"
+            >Banking
+          </a>
+        </li>
+        <li *ngIf="showMenu">
+          <a
+            id="menu_event"
+            class=""
+            routerLink="/events"
+            title="Match Management"
+            routerLinkActive="select"
+            >MM
+          </a>
+        </li>
+        <li *ngIf="showMenu">
+          <a
+            id="menu_event"
+            class=""
+            routerLink="/teenpatti"
+            title="Teenpatti"
+            routerLinkActive="select"
+            >Teenpatti
+          </a>
+        </li>
+        <li *ngIf="showMenu">
+          <a class="menu-drop" [class.select]="router.url.includes('/manual')">
+            Manual
+          </a>
+          <ul>
+            <li>
+              <a
+                id="menu_event"
+                class=""
+                title="Fancy Management"
+                routerLink="/manual/fancy"
+                target="_blank"
+                >Fancy
+              </a>
+            </li>
+            <li>
+              <a
+                id="menu_event"
+                class=""
+                routerLink="/manual/bookmaking"
+                title="Book Making Management"
+                target="_blank"
+                >Book Making
+              </a>
+            </li>
+          </ul>
+        </li>
+
+        <li *ngIf="showMenu">
+          <a
+            class="menu-drop"
+            [class.select]="router.url.includes('/messages')"
+          >
+            Messages
+          </a>
+          <ul>
+            <li *ngIf="currentUser?.userType === 1">
+              <a
+                id="menu_event"
+                class=""
+                title="Rules"
+                routerLink="/messages/rules"
+                target="_blank"
+                >Rules
+              </a>
+            </li>
+            <li *ngIf="currentUser?.userType === 2">
+              <a
+                id="menu_event"
+                class=""
+                routerLink="/messages/ticker"
+                title="Ticker"
+                target="_blank"
+                >Ticker
+              </a>
+            </li>
+            <li>
+              <a
+                id="menu_event"
+                class=""
+                routerLink="/messages/commentary"
+                title="Commentary"
+                target="_blank"
+                >Commentary
+              </a>
+            </li>
+            <li>
+              <a
+                id="menu_event"
+                class=""
+                routerLink="/messages/logs"
+                title="Logs"
+                target="_blank"
+                >Logs
+              </a>
+            </li>
+          </ul>
+        </li>
+        <span class="spacer"></span>
+
+        <li class="tv" title="Live TV">
+          <a href="#"><img src="assets/images/retro-tv.png" alt="" /></a>
+        </li>
+        <li class="score" title="Live Score">
+          <a href="#"><img src="assets/images/score-board.png" alt="" /></a>
+        </li>
+        <li class="online-users" title="Online Users">
+          <a href="#"><img src="assets/images/online-users.png" alt="" /></a>
+        </li>
+      </ul>
+    </div>
+  </div>
+</div>

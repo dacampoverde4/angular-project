@@ -1,0 +1,51 @@
+.event-left,
+.event-right {
+  width: 49.5%;
+}
+.profile-wrap {
+  background-color: #fff;
+  border-bottom: 1px solid #7e97a7;
+  margin-bottom: 15px;
+
+  h3 {
+    background-color: #7e97a7;
+    color: #fff;
+    line-height: 24px;
+    padding: 0 10px;
+  }
+  dt {
+    width: 125px;
+    padding: 5px 0 5px 10px;
+    color: #243a48;
+  }
+  dd {
+    position: relative;
+    min-height: 26px;
+    padding: 5px 0 5px 10px;
+    border-bottom: 1px solid #e0e6e6;
+  }
+
+  .favor-set {
+    position: absolute;
+    top: 50%;
+    transform: translateY(-50%);
+    right: 5px;
+    cursor: pointer;
+  }
+
+  select {
+    min-width: 150px;
+    margin: 0;
+  }
+}
+
+.event-left dt,
+.event-right dt {
+  font-size: 11px;
+}
+
+// .edit-pass {
+//   display: flex;
+//   justify-content: space-around;
+//   align-items: center;
+// }

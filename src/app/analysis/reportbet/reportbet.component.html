@@ -1,0 +1,696 @@
+<div class="full-wrap">
+  <!-- <div class="function-wrap">
+    <div>
+      <ul class="input-list">
+        <li>
+          <input type="checkbox" name="" id="" />Soccer
+          <input type="checkbox" name="" id="" />Tennis
+          <input type="checkbox" name="" id="" />Cricket
+          <input type="checkbox" name="" id="" />Cricket/Fancy Bet
+          <input type="checkbox" name="" id="" />Book Making
+          <input type="checkbox" name="" id="" />Multimarket
+        </li>
+      </ul>
+    </div>
+    <ul class="input-list">
+      <li>
+        <select name="" id="">
+          <option value="">Select Tournament</option>
+          <option value="">Fed Cup</option>
+          <option value="">ITF Chiswick</option>
+          <option value="">Davis Cup 2019</option>
+        </select>
+        <select name="" id="">
+          <option value="">Select Match</option>
+          <option value="">India v Sri Lanka</option>
+          <option value="">Zim Bambwe v Australia</option>
+          <option value="">England v New Zealand</option>
+        </select>
+      </li>
+    </ul>
+
+    <ul class="input-list">
+      <li>
+        <select name="" id="">
+          <option value="">Select Status</option>
+          <option value="">Unmatched</option>
+          <option value="">Matched</option>
+          <option value="">Settled</option>
+          <option value="">Cancelled</option>
+          <option value="">Voided</option>
+        </select>
+        <input
+          id="startDate"
+          class="cal-input"
+          type="text"
+          placeholder="YYYY-MM-DD"
+          [(ngModel)]="fromDate"
+          [dpDayPicker]="dateConfig"
+          [theme]="'dp-material'"
+          [mode]="'day'"
+          autocomplete="off"
+        />
+        <input
+          id="startTime"
+          class="time-input disable"
+          type="text"
+          placeholder="09:00"
+          maxlength="5"
+        />
+        to
+        <input
+          id="endDate"
+          class="cal-input"
+          type="text"
+          placeholder="YYYY-MM-DD"
+          [(ngModel)]="toDate"
+          [dpDayPicker]="dateConfig"
+          [theme]="'dp-material'"
+          [mode]="'day'"
+          autocomplete="off"
+        />
+        <input
+          id="endTime"
+          class="time-input disable"
+          type="text"
+          placeholder="08:59"
+          maxlength="5"
+        />
+        <button class="btn-send">Get History</button>
+      </li>
+    </ul>
+  </div> -->
+  <div class="container">
+    <div class="market-name">
+      <h2>Bangladesh vs Zimbabwe - Match Odds</h2>
+    </div>
+    <div class="middle-pane">
+      <div class="table-container">
+        <table
+          class="table01 table-pt match-odds"
+          style="text-align: center; font-size: 12px"
+        >
+          <thead>
+            <tr>
+              <th width="30%" class="bettitle runnertitle">
+                <div class="align-L">
+                  <span class="marketname"
+                    >Match Odds<span
+                      id="spanmarketallow3702"
+                      class="allowbet"
+                    ></span
+                  ></span>
+                </div>
+                <div style="">
+                  <!-- ngIf: isdashval==0 -->
+                </div>
+              </th>
+              <th class="odd"></th>
+              <th class="odd"></th>
+              <th class="backheader back odd">Back</th>
+              <th class="layheader lay1 odd">Lay</th>
+              <th class="odd"></th>
+              <th class="odd"></th>
+            </tr>
+          </thead>
+          <tbody>
+            <!-- ngRepeat: runner in runnerData track by $index -->
+            <!-- ngIf: matchStatus=='OPEN' -->
+            <tr id="Bangladesh">
+              <td class="align-L">
+                <b>Bangladesh</b> <br /><b
+                  ><span id="runnerpnl0" class="loss-text">0.00</span></b
+                >
+              </td>
+              <td style="" class="back3 d-head" id="runnerBack3-0">
+                <b class="rateback3">1.2</b> <br /><span
+                  class="backSize3"
+                  style="font-size: 10px"
+                  >216</span
+                >
+              </td>
+              <td style="" class="back2 d-head" id="runnerBack2-0">
+                <b class="rateback2">1.21</b> <br /><span
+                  class="backSize2"
+                  style="font-size: 10px"
+                  >2467.75</span
+                >
+              </td>
+              <td style="" class="back1" id="runnerBack1-0">
+                <b class="rateback1">1.22</b> <br /><span
+                  class="backSize1"
+                  style="font-size: 10px"
+                  >1277.98</span
+                >
+              </td>
+              <td style="" class="lay1" id="runnerLay1-0">
+                <b class="ratelay1">1.23</b> <br /><span
+                  class="laySize1"
+                  style="font-size: 10px"
+                  >28306.19</span
+                >
+              </td>
+              <td style="" class="lay2 d-head" id="runnerLay2-0">
+                <b class="ratelay2">1.24</b> <br /><span
+                  class="laySize2"
+                  style="font-size: 10px"
+                  >7345.41</span
+                >
+              </td>
+              <td style="" class="lay3 d-head" id="runnerLay3-0">
+                <b class="ratelay3">1.25</b> <br /><span
+                  class="laySize3"
+                  style="font-size: 10px"
+                  >10700.73</span
+                >
+              </td>
+            </tr>
+            <!-- end ngIf: matchStatus=='OPEN' -->
+            <!-- end ngRepeat: runner in runnerData track by $index -->
+            <!-- ngIf: matchStatus=='OPEN' -->
+            <tr id="Zimbabwe">
+              <td class="align-L">
+                <b>Zimbabwe</b> <br /><b
+                  ><span id="runnerpnl1" class="loss-text">0.00</span></b
+                >
+              </td>
+              <td style="" class="back3 d-head" id="runnerBack3-1">
+                <b class="rateback3">95</b> <br /><span
+                  class="backSize3"
+                  style="font-size: 10px"
+                  >23.57</span
+                >
+              </td>
+              <td style="" class="back2 d-head" id="runnerBack2-1">
+                <b class="rateback2">100</b> <br /><span
+                  class="backSize2"
+                  style="font-size: 10px"
+                  >99.22</span
+                >
+              </td>
+              <td style="" class="back1" id="runnerBack1-1">
+                <b class="rateback1">110</b> <br /><span
+                  class="backSize1"
+                  style="font-size: 10px"
+                  >108.17</span
+                >
+              </td>
+              <td style="" class="lay1" id="runnerLay1-1">
+                <b class="ratelay1">120</b> <br /><span
+                  class="laySize1"
+                  style="font-size: 10px"
+                  >9.6</span
+                >
+              </td>
+              <td style="" class="lay2 d-head" id="runnerLay2-1">
+                <b class="ratelay2">130</b> <br /><span
+                  class="laySize2"
+                  style="font-size: 10px"
+                  >2.47</span
+                >
+              </td>
+              <td style="" class="lay3 d-head" id="runnerLay3-1">
+                <b class="ratelay3">140</b> <br /><span
+                  class="laySize3"
+                  style="font-size: 10px"
+                  >4.43</span
+                >
+              </td>
+            </tr>
+            <!-- end ngIf: matchStatus=='OPEN' -->
+            <!-- end ngRepeat: runner in runnerData track by $index -->
+            <!-- ngIf: matchStatus=='OPEN' -->
+            <tr id="The_Draw">
+              <td class="align-L">
+                <b>The Draw</b> <br /><b
+                  ><span id="runnerpnl2" class="loss-text">0.00</span></b
+                >
+              </td>
+              <td style="" class="back3 d-head" id="runnerBack3-2">
+                <b class="rateback3">5.3</b> <br /><span
+                  class="backSize3"
+                  style="font-size: 10px"
+                  >5</span
+                >
+              </td>
+              <td style="" class="back2 d-head" id="runnerBack2-2">
+                <b class="rateback2">5.4</b> <br /><span
+                  class="backSize2"
+                  style="font-size: 10px"
+                  >5311.26</span
+                >
+              </td>
+              <td style="" class="back1" id="runnerBack1-2">
+                <b class="rateback1">5.5</b> <br /><span
+                  class="backSize1"
+                  style="font-size: 10px"
+                  >1245.29</span
+                >
+              </td>
+              <td style="" class="lay1" id="runnerLay1-2">
+                <b class="ratelay1">5.6</b> <br /><span
+                  class="laySize1"
+                  style="font-size: 10px"
+                  >222.83</span
+                >
+              </td>
+              <td style="" class="lay2 d-head" id="runnerLay2-2">
+                <b class="ratelay2">5.9</b> <br /><span
+                  class="laySize2"
+                  style="font-size: 10px"
+                  >53.13</span
+                >
+              </td>
+              <td style="" class="lay3 d-head" id="runnerLay3-2">
+                <b class="ratelay3">6</b> <br /><span
+                  class="laySize3"
+                  style="font-size: 10px"
+                  >29.46</span
+                >
+              </td>
+            </tr>
+          </tbody>
+        </table>
+      </div>
+      <div class="table-container">
+        <table class="table01 table-pt" style="font-size: 12px; width: 530px">
+          <thead>
+            <!-- ngRepeat: MDLlist in MDLDataList track by MDLlist.mdlUsername -->
+            <!-- ngIf: $index==0 -->
+            <tr>
+              <th class="align-L">
+                MDL&nbsp;<small>[&nbsp;UserName&nbsp;]</small>
+              </th>
+              <th>Bangladesh</th>
+              <th>Zimbabwe</th>
+              <!-- ngIf: MDLlist.runner3Name!=null -->
+              <th>The Draw</th>
+              <!-- end ngIf: MDLlist.runner3Name!=null -->
+            </tr>
+            <!-- end ngIf: $index==0 -->
+            <!-- end ngRepeat: MDLlist in MDLDataList track by MDLlist.mdlUsername -->
+            <!-- ngIf: $index==0 -->
+            <!-- end ngRepeat: MDLlist in MDLDataList track by MDLlist.mdlUsername -->
+            <!-- ngIf: $index==0 -->
+            <!-- end ngRepeat: MDLlist in MDLDataList track by MDLlist.mdlUsername -->
+          </thead>
+          <tbody>
+            <!-- ngRepeat: MDLlist in MDLDataList track by MDLlist.mdlUsername -->
+            <!-- ngIf: $index==0 -->
+            <tr class="trMDl">
+              <td class="align-R"><b>Admin P&amp;L</b></td>
+              <td class="greenclass"><b>0.00</b></td>
+              <td class="greenclass"><b>0.00</b></td>
+              <!-- ngIf: MDLlist.runner3Name!=null -->
+              <td class="greenclass"><b>0.00</b></td>
+              <!-- end ngIf: MDLlist.runner3Name!=null -->
+            </tr>
+            <!-- end ngIf: $index==0 -->
+            <!-- end ngRepeat: MDLlist in MDLDataList track by MDLlist.mdlUsername -->
+            <!-- ngIf: $index==0 -->
+            <!-- end ngRepeat: MDLlist in MDLDataList track by MDLlist.mdlUsername -->
+            <!-- ngIf: $index==0 -->
+            <!-- end ngRepeat: MDLlist in MDLDataList track by MDLlist.mdlUsername -->
+          </tbody>
+          <!-- ngRepeat: MDLlist in MDLDataList track by MDLlist.mdlUsername -->
+          <!-- end ngRepeat: MDLlist in MDLDataList track by MDLlist.mdlUsername -->
+          <tfoot>
+            <tr class="trMDl">
+              <td
+                style="width: 215px; color: #333; font-size: 12px"
+                class="text-left cursor-pointer"
+                data-toggle="collapse"
+                data-target="#MDLname-1"
+                aria-expanded="true"
+                role="main"
+              >
+                <b>arjun[arjun123]</b>
+              </td>
+              <td class="greenclass">0.00</td>
+              <td class="greenclass">0.00</td>
+              <!-- ngIf: MDLlist.runner3Name!=null -->
+              <td class="greenclass">0.00</td>
+              <!-- end ngIf: MDLlist.runner3Name!=null -->
+            </tr>
+            <tr
+              id="MDLname-1"
+              class="collapse in"
+              aria-expanded="true"
+              style=""
+            >
+              <td colspan="4">
+                <!-- <div  > -->
+                <table
+                  style="background: #d5f6f7; width: 100%"
+                  class="table-hover"
+                >
+                  <!-- ngRepeat: DLlist in MDLlist.dlBook track by DLlist.dlUsername -->
+                  <tbody>
+                    <tr>
+                      <td
+                        style="width: 209px; color: #333; font-size: 10px"
+                        class="text-left cursor-pointer"
+                        data-toggle="collapse"
+                        data-target="#DLname-0-1"
+                        aria-expanded="true"
+                        role="main"
+                      >
+                        <b>TEAMSAGR[TEAMSAGR]</b>
+                      </td>
+                      <td class="greenclass">0.00</td>
+                      <td class="greenclass">0.00</td>
+                      <!-- ngIf: DLlist.runner3Name!=null -->
+                      <td class="greenclass">0.00</td>
+                      <!-- end ngIf: DLlist.runner3Name!=null -->
+                    </tr>
+                    <tr
+                      id="DLname-0-1"
+                      class="collapse in"
+                      aria-expanded="true"
+                      style=""
+                    >
+                      <td colspan="4">
+                        <table
+                          style="background: honeydew; width: 100%"
+                          class="table-hover"
+                        >
+                          <!-- ngRepeat: CLlist in DLlist.clientBook track by CLlist.userName -->
+                          <tbody>
+                            <tr>
+                              <td
+                                style="
+                                  width: 200px;
+                                  color: #333;
+                                  font-size: 10px;
+                                "
+                                class="text-left"
+                              >
+                                <b>SURAJ SIR[TS002]</b>
+                              </td>
+                              <td class="greenclass">100.00</td>
+                              <td class="greenclass">100.00</td>
+                              <!-- ngIf: CLlist.runner3Name!=null -->
+                              <td class="greenclass">260.00</td>
+                              <!-- end ngIf: CLlist.runner3Name!=null -->
+                            </tr>
+                          </tbody>
+                          <!-- end ngRepeat: CLlist in DLlist.clientBook track by CLlist.userName -->
+                        </table>
+                      </td>
+                    </tr>
+                  </tbody>
+                  <!-- end ngRepeat: DLlist in MDLlist.dlBook track by DLlist.dlUsername -->
+                  <!-- end ngRepeat: DLlist in MDLlist.dlBook track by DLlist.dlUsername -->
+                </table>
+                <!-- </div> -->
+              </td>
+            </tr>
+          </tfoot>
+          <!-- end ngRepeat: MDLlist in MDLDataList track by MDLlist.mdlUsername -->
+          <!-- end ngRepeat: MDLlist in MDLDataList track by MDLlist.mdlUsername -->
+        </table>
+      </div>
+    </div>
+  </div>
+  <div class="container">
+    <div class="table-container" style="width: 50%; height: 350px">
+      <table
+        class="table01 table-pt fancy"
+        style="font-size: 12px; text-align: center"
+      >
+        <thead>
+          <tr>
+            <th width="50%" class="layheader">No [K]</th>
+            <th class="backheader">Yes [L]</th>
+          </tr>
+        </thead>
+        <!-- ngRepeat: fancy in fancydata track by fancy.id -->
+        <tbody *ngFor="let l of [1, 1, 1, 1, 1]">
+          <tr>
+            <td
+              colspan="2"
+              style="background: #000; color: #fff; font-weight: bolder"
+            >
+              B CHARI RUN (BAN VS ZIM)ADV
+            </td>
+          </tr>
+          <!-- ngIf: fancy.ballStatus=='' -->
+          <tr>
+            <td class="sessionbetbox lay1" style="">
+              <a>
+                <div class="text-right price">25</div>
+                <span class="sessionpoint" style="display: block"
+                  >[&nbsp;<span style="display: inline">110</span>&nbsp;]
+                </span>
+              </a>
+            </td>
+            <td class="sessionbetbox back1" style="">
+              <a>
+                <div class="text-right price">25</div>
+                <span class="sessionpoint" style="display: block"
+                  >[&nbsp;<span style="display: inline">90</span>&nbsp;]
+                </span>
+              </a>
+            </td>
+          </tr>
+          <!-- end ngIf: fancy.ballStatus=='' -->
+          <!-- ngIf: fancy.ballStatus=='SUSPENDED' -->
+          <!-- ngIf: fancy.ballStatus=='INACTIVE' -->
+          <!-- ngIf: fancy.ballStatus=='BALL RUNNING...' -->
+          <tr>
+            <td>
+              <div class="liabilitybox">
+                <div>
+                  <span class="sessionlibility" style="color: #ff0000"
+                    >Libility :
+                    <b id="fancy_book_13875028" style="color: red">--</b></span
+                  >
+                </div>
+                <div>
+                  <button class="btn" (click)="openBookModel()">Book</button>
+                </div>
+              </div>
+            </td>
+            <td>
+              <div>
+                <div class="no-padding">
+                  <span>Min / Max:</span>
+                  <span class="label label-warning cursor-pointer"
+                    >500<b>-</b>100000</span
+                  >
+                </div>
+              </div>
+            </td>
+          </tr>
+        </tbody>
+      </table>
+    </div>
+  </div>
+
+  <div class="total_all">
+    <ul class="input-list">
+      <li>
+        <input type="text" />
+
+        <button class="btn-send">Reject All Bets</button>
+      </li>
+    </ul>
+    <span class="spacer"></span>
+    <div style="margin-right: 4px">
+      <label for="total-records">Total Records: </label>82
+    </div>
+    <div class="download-reports">
+      <button class="excel btn" title="Export Excel">
+        <img src="assets/images/transparent.gif" alt="" />
+      </button>
+      <button class="pdf btn" title="Export Pdf">
+        <img src="assets/images/transparent.gif" alt="" />
+      </button>
+      <button class="csv btn" title="Export Csv">
+        <img src="assets/images/transparent.gif" alt="" />
+      </button>
+    </div>
+  </div>
+
+  <div class="table-container">
+    <table
+      class="table01"
+      data-ng-table="tableParams"
+      data-show-filter="true"
+      style="font-size: 12px; text-align: center; white-space: nowrap"
+    >
+      <!-- ngInclude: templates.header -->
+      <thead ng-include="templates.header" class="ng-scope">
+        <tr>
+          <th>
+            <input type="checkbox" name="" id="" />
+          </th>
+          <th>Active</th>
+          <th>Accept</th>
+          <th>ID</th>
+          <th>MDL</th>
+          <th>DL</th>
+          <th>Client</th>
+          <th>Selection</th>
+          <th>BackLay</th>
+          <th>Rate/Score</th>
+          <th>Stake</th>
+          <th>Status</th>
+          <th>Placed Time</th>
+          <th>Info</th>
+          <th>Last Login</th>
+        </tr>
+      </thead>
+      <tbody class="tbl">
+        <!-- ngRepeat: user in $data -->
+        <tr
+          class="ng-scope back3"
+          id="backlay_0"
+          *ngFor="let l of [1, 1, 1, 1]"
+        >
+          <td>
+            <input
+              type="checkbox"
+              data-ng-model="checkboxes.items[user.id]"
+              value="1"
+              data-ng-class="checkAll"
+            />
+          </td>
+          <td title="'Active'" class="text-center" data-title-text="Active">
+            <a (click)="openRejectBetModal()">
+              <i class="fa fa-times-circle fa-2x"></i>
+            </a>
+          </td>
+          <td
+            title="'Accept'"
+            style="text-align: center"
+            data-title-text="Accept"
+          >
+            <a><i class="fa fa-pencil-square-o fa-2x"></i></a>
+          </td>
+          <td title="'ID'">119235</td>
+          <td title="'MDL'">Murari Aagra[Sat480]</td>
+          <td title="'DL'">bhola[bldelhi]</td>
+          <td title="'Client'">Monu[Monu]</td>
+          <td title="'Selection'">RAJASTHAN BJP total seats</td>
+          <td style="white-space: nowrap" title="'BackLay'">
+            <span class="backlay">YES</span>
+            <label class="xyz">
+              <input type="checkbox" />
+              <span class="slider round"></span>
+            </label>
+            <!-- ngIf: user.BackLay == 'BACK' || user.BackLay == 'LAY'  -->
+          </td>
+          <td title="'Rate/score'">
+            <span class="ng-binding">100/52</span
+            ><!-- end ngIf: user.score==0 -->
+          </td>
+          <td title="'Stake'">75000</td>
+          <td title="'Status'">Matched</td>
+          <td title="'Placed Time'">11/19/2018 4:55:19 PM</td>
+          <td title="'Info'" class="text-center infomsg" data-title-text="Info">
+            <!-- ngIf: user.source!='web' --><i
+              class="fa fa-mobile fa-2x text-danger"
+              title="os:Android, os_version:7.1.1, browser:Chrome, browser_version:70, IP: 47.30.128.219 "
+            ></i
+            ><!-- end ngIf: user.source!='web' -->
+            <!-- ngIf: user.source=='web' -->
+          </td>
+          <td title="'Last Login'">11/19/2018 5:00:19 PM</td>
+        </tr>
+      </tbody>
+    </table>
+  </div>
+</div>
+
+<app-modal [(open)]="isBookModalOpen">
+  <div class="modal-header">
+    <h3>Fancy Book</h3>
+  </div>
+  <div class="modal-content" style="height: 250px">
+    <div class="table-container">
+      <table class="table01 table-pt" style="text-align: center">
+        <thead>
+          <tr>
+            <th width="50%">Score</th>
+            <th>Amount</th>
+          </tr>
+        </thead>
+        <tbody>
+          <tr *ngFor="let l of [1, 1, 1, 1, 1, 1, 1, 1, 1]">
+            <td>180</td>
+            <td>1985</td>
+          </tr>
+        </tbody>
+      </table>
+    </div>
+  </div>
+  <div class="modal-footer">
+    <div class="btn_box">
+      <button (click)="isBookModalOpen = false" class="btn">Close</button>
+    </div>
+  </div>
+</app-modal>
+
+<app-modal [(open)]="isRejectBetModalOpen">
+  <div class="modal-header">
+    <h3>Reject Bet</h3>
+  </div>
+  <div class="modal-content white-wrap">
+    <div class="input-group">
+      <label for="betid">Bet ID: </label>
+      <input type="text" />
+    </div>
+  </div>
+  <div class="modal-footer">
+    <div class="btn_box inline-form">
+      <div class="form_list">
+        <label>Password: </label
+        ><input id="changeStatusPassword" type="password" placeholder="Enter" />
+      </div>
+      <div class="btn_box">
+        <button class="btn-send">Change</button>
+      </div>
+    </div>
+  </div>
+</app-modal>
+
+<pagination-template #pagination="paginationApi">
+  <ul id="pageNumberContent" class="pages">
+    <li id="prev">
+      <a
+        href="javascript:void(0);"
+        class="disable"
+        (click)="pagination.previous()"
+        >Prev</a
+      >
+    </li>
+    <li id="pageNumber">
+      <ng-template *ngFor="let page of pagination.pages">
+        <!-- <a
+          (click)="pagination.setCurrent(page.value)"
+          *ngIf="pagination.getCurrent() != page.value"
+          style="pointer-events: none"
+          >{{ page.value }}
+        </a> -->
+        <!-- <a
+          *ngIf="pagination.getCurrent() == page.value"
+          class="select"
+          style="pointer-events: none"
+          >{{ page.value }}
+        </a> -->
+      </ng-template>
+
+      <a class="select" style="pointer-events: none">1 </a>
+    </li>
+    <!-- <li id="pageNumber"><a href="javascript:void(0);">2</a></li> -->
+    <li id="next">
+      <a
+        href="javascript:void(0);"
+        [class.disabled]="pagination.isLastPage()"
+        (click)="pagination.next()"
+        >Next</a
+      >
+    </li>
+  </ul>
+</pagination-template>

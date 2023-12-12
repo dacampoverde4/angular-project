@@ -1,0 +1,188 @@
+@import "src/vars";
+
+.top {
+  position: relative;
+  top: 0;
+  width: 100%;
+  display: flex;
+  flex-flow: column;
+  min-width: 768px;
+  background: #000 url("../../assets/images/bg-top-skyEX.jpg") repeat-x;
+}
+
+.header {
+  height: 46px;
+  color: #ffb80c;
+  display: flex;
+  align-items: center;
+  h1 a {
+    color: #fff;
+  }
+}
+
+.menu-wrap,
+.header {
+  display: flex;
+}
+
+.menu-wrap {
+  background-image: linear-gradient(180deg, #ffcc2f 8%, #ffb80c 100%);
+  box-shadow: inset 0 1px 0 0 rgba(255, 255, 255, 0.75);
+  height: 30px;
+
+  .menu-drop {
+    cursor: pointer;
+  }
+
+  a.menu-drop:after,
+  a.menu-drop.select:after {
+    width: 0;
+    height: 0;
+    border-style: solid;
+    border-width: 5px 3px 0 3px;
+    border-color: #a5a5a5 transparent transparent transparent;
+    margin-left: 10px;
+    vertical-align: middle;
+    content: "";
+    border-top-color: #222;
+  }
+}
+
+.menu {
+  font-weight: 700;
+  height: 100%;
+  width: 100%;
+
+  li {
+    &:hover {
+      ul {
+        display: flex;
+      }
+    }
+
+    ul {
+      display: none;
+      position: absolute;
+      background-color: #1e1e1e;
+      border-top: 1px solid #383838;
+      z-index: 9999;
+      flex-flow: column;
+      top: 100%;
+
+      li {
+        height: 30px;
+      }
+
+      a {
+        color: $accent;
+      }
+    }
+  }
+  a:hover {
+    background-color: transparent;
+    text-decoration: underline;
+  }
+
+  img {
+    height: 24px;
+    width: 24px;
+    transform: scale(0.7);
+  }
+  .tv,
+  .score,
+  .online-users {
+    a {
+      padding: 0 2px;
+    }
+  }
+}
+
+.menu li,
+.setting-wrap li {
+  align-items: center;
+  border-right: 1px solid rgba(69, 32, 7, 0.2);
+}
+
+.account-wrap {
+  display: flex;
+
+  li {
+    position: relative;
+    display: flex;
+    align-items: center;
+
+    &:not(:last-child) {
+      margin-right: 12px;
+    }
+
+    span {
+      margin-right: 4px;
+      color: #fff;
+      height: 15px;
+      line-height: 15px;
+      font-size: 10px;
+      padding: 0 5px;
+      border-radius: 4px;
+      background-color: #000;
+      margin-right: 3px;
+    }
+  }
+
+  .head-refresh a {
+    background-position: -80px -2075px;
+    height: 25px;
+    width: 30px;
+    display: inline-block;
+  }
+}
+
+#mainBalance {
+  margin-left: 4px;
+}
+
+.time_zone {
+  // color: #fff;
+  margin: 0;
+  padding: 0 12px;
+  display: inline-flex;
+  align-items: center;
+}
+
+.header .logout img {
+  width: 10px;
+  height: 11px;
+  background: url('data:image/svg+xml,<svg width="10" height="11" xmlns="http://www.w3.org/2000/svg"><path d="M5.71 7.706l1.432-1.604H1.778V4.898h5.39L5.71 3.294l.781-.86L9.278 5.5 6.49 8.565l-.78-.86zM1.12 0C.825 0 .564.124.339.372a1.24 1.24 0 0 0-.339.86v8.536c0 .325.113.611.339.86.225.248.486.372.78.372H8.88c.295 0 .556-.124.781-.372a1.24 1.24 0 0 0 .339-.86V7.333H8.88v2.435H1.12V1.232h7.76v2.435H10V1.232a1.24 1.24 0 0 0-.339-.86C9.436.124 9.175 0 8.881 0H1.12z" fill="rgb(0,0,0)" fill-rule="evenodd"/></svg>')
+    no-repeat;
+}
+
+.logout,
+.playpause {
+  cursor: pointer;
+  height: 23px;
+  width: 24px;
+  margin-top: 1px;
+  border-radius: 3px;
+  justify-content: center;
+  box-shadow: inset 0 1px 1px rgba($color: #fff, $alpha: 0.7);
+  background-color: rgba(255, 23, 23, 0.932);
+
+  a {
+    color: #eee;
+  }
+
+  button {
+    background: transparent;
+    border: 0;
+    display: inline-flex;
+    align-items: center;
+    justify-content: center;
+    outline: 0;
+    height: 100%;
+    width: 100%;
+    cursor: pointer;
+  }
+}
+
+.playpause.play {
+  background-color: rgba(52, 199, 76, 0.932);
+}

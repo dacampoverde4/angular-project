@@ -1,0 +1,56 @@
+.analysis-list {
+  margin: 8px 0;
+}
+
+.analysis-item {
+  display: flex;
+  flex-flow: column;
+  height: 64px;
+  margin-bottom: 8px;
+
+  & > div {
+    display: flex;
+    align-items: center;
+    flex: 1;
+  }
+
+  .analysis-header {
+    a {
+      display: inline-flex;
+      align-items: center;
+      height: 100%;
+      padding: 0 8px;
+      font-weight: 700;
+      background: #fff;
+    }
+  }
+
+  .body {
+    display: grid;
+    background: #fff;
+    font-size: 1.05em;
+    grid-template-columns: 4fr 1fr 1fr 4fr 1fr 1fr 4fr 1fr 1fr 3fr 1fr;
+    box-shadow: 0 2px 2px rgba(0,0,0,0.1);
+  }
+
+  .back, .lay, .runner, .bets {
+    display: flex;
+    height: 100%;
+    align-items: center;
+    justify-content: center;
+    padding: 0 8px;
+  }
+
+  .bets {
+    background-color: #bababa;
+  }
+
+  .runner {
+    display: flex;
+    flex-flow: column;
+  }
+
+  .volume {
+    font-weight: 700;
+  }
+}

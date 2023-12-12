@@ -1,0 +1,21 @@
+@import 'src/assets/scss/tables';
+
+.commentary-detail {
+  display: flex;
+
+  select {
+    margin-right: 4px;
+  }
+
+  select, input {
+    width: 98%;
+  }
+
+  & > div {
+    flex: 1;
+  }
+}
+
+textarea {
+  width: 100%;
+}

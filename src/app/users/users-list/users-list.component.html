@@ -1,0 +1,36 @@
+<div class="main_wrap">
+  <div class="marquee-box">
+    <h4>News</h4>
+    <div class="marquee">
+      <div>
+        <span>Test news</span>
+      </div>
+    </div>
+  </div>
+</div>
+<div class="main_wrap">
+  <div class="total_all">
+    <div class="agent_path">
+      <breadcrumb #parent>
+        <ul *ngIf="parent && parent.breadcrumbs?.length !== 0" id="agentPath" class="agent_path-L">
+          <ng-container *ngFor="let route of parent.breadcrumbs">
+            <li *ngIf="!route.terminal" id="path4">
+              <a [routerLink]="route.url">
+                <span class="lv_{{route.displayName.userType}}"> </span>
+                <strong>{{ route.displayName.userName }}</strong>
+                <!-- {{log(parent)}} -->
+              </a>
+            </li>
+            <li *ngIf="route.terminal" id="path3" class="last_li" style="">
+              <a>
+                <span class="lv_{{route.displayName.userType}}"> </span>
+                <strong>{{ route.displayName.userName }}</strong>
+              </a>
+            </li>
+          </ng-container>
+        </ul>
+      </breadcrumb>
+    </div>
+  </div>
+  <router-outlet></router-outlet>
+</div>

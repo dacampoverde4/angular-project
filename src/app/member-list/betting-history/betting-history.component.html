@@ -1,0 +1,502 @@
+<h3>Betting History</h3>
+<ul class="report-tab-wrap" style="display: block">
+  <li
+    class="report-tab"
+    id="reportType_exchange"
+    [class.select]="selectedTabIndex === 0"
+    (click)="selectTab(0)"
+  >
+    Exchange
+  </li>
+
+  <li
+    class="report-tab"
+    id="reportType_casino"
+    [class.select]="selectedTabIndex === 1"
+    (click)="selectTab(1)"
+  >
+    Casino
+  </li>
+
+  <li
+    class="report-tab"
+    id="reportType_sportsBook"
+    [class.select]="selectedTabIndex === 2"
+    (click)="selectTab(2)"
+  >
+    Sportsbook
+  </li>
+
+  <li
+    class="report-tab"
+    id="reportType_bookMaker"
+    [class.select]="selectedTabIndex === 3"
+    (click)="selectTab(3)"
+  >
+    BookMaker
+  </li>
+</ul>
+<div class="function-wrap">
+  <ul class="input-list">
+    <div id="statusCondition" style="display: none">
+      <li><label>Bet Status:</label></li>
+      <li>
+        <select name="betStatus" id="betStatus"></select>
+      </li>
+    </div>
+
+    <li><label>Period</label></li>
+    <li>
+      <input
+        id="startDate"
+        class="cal-input"
+        type="text"
+        placeholder="YYYY-MM-DD"
+        [(ngModel)]="fromDate"
+        [dpDayPicker]="dateConfig"
+        [theme]="'dp-material'"
+        [mode]="'day'"
+        autocomplete="off"
+      />
+      <input
+        id="startTime"
+        disabled=""
+        class="time-input disable"
+        type="text"
+        placeholder="09:00"
+        maxlength="5"
+      />
+      to
+      <input
+        id="endDate"
+        class="cal-input"
+        type="text"
+        placeholder="YYYY-MM-DD"
+        [(ngModel)]="toDate"
+        [dpDayPicker]="dateConfig"
+        [theme]="'dp-material'"
+        [mode]="'day'"
+        autocomplete="off"
+      />
+      <input
+        id="endTime"
+        disabled=""
+        class="time-input disable"
+        type="text"
+        placeholder="08:59"
+        maxlength="5"
+      />
+    </li>
+    <li style="display: none">(TimeZone:IST)</li>
+  </ul>
+
+  <ul class="input-list">
+    <li><a id="today" href="#" class="btn">Just For Today</a></li>
+    <li>
+      <a id="yesterday" href="#" class="btn">From Yesterday</a>
+    </li>
+    <li style="display: none">
+      <a id="last7days" href="#" class="btn">Last 7 days</a>
+    </li>
+    <li style="display: none">
+      <a id="last30days" href="#" class="btn">Last 30 days</a>
+    </li>
+    <li style="display: none">
+      <a id="last2months" href="#" class="btn">Last 2 Months</a>
+    </li>
+    <li style="display: none">
+      <a id="last3months" href="#" class="btn">Last 3 Months</a>
+    </li>
+    <li><a id="getPL" href="#" class="btn-send">Get P &amp; L</a></li>
+  </ul>
+</div>
+<div id="report">
+  <table id="matchTable" class="table-s" style="display: table">
+    <tbody>
+      <tr>
+        <th width="9%" class="align-L">Bet ID</th>
+        <th width="9%" class="align-L">PL ID</th>
+        <th width="" class="align-L">Market</th>
+        <th width="12%">Selection</th>
+        <th width="4%">Type</th>
+        <th width="8%">Bet placed</th>
+        <th width="7%">Odds req.</th>
+        <th width="8%">Stake</th>
+        <th width="8%">Avg. odds matched</th>
+        <th width="10%">Profit/Loss</th>
+        <th width="10%" id="userCancelTitle" style="display: none">
+          User Cancel
+        </th>
+      </tr>
+
+      <tr id="matchRowTemplate" style="display: none">
+        <td class="align-L"><a id="betID" href="javascript: void(0);"></a></td>
+        <td class="align-L" id="playerID"></td>
+        <td id="matchTitle" class="align-L"></td>
+        <td id="matchSelection"></td>
+        <td><span id="matchType"></span></td>
+        <td><span id="betPlaced" class="small-date"></span></td>
+        <td id="matchOddsReq"></td>
+        <td id="matchStake"></td>
+        <td id="matchAvgOdds"></td>
+        <td><span id="pol" class="small-date"></span></td>
+        <td id="userCancel"></td>
+      </tr>
+
+      <tr id="expandReductionRowTemplate" class="expand" style="display: none">
+        <td colspan="10">
+          <img class="expand-arrow" src="assets/images/transparent.gif" />
+          <table id="txTableTemplate">
+            <tbody>
+              <tr>
+                <th>Bet taken</th>
+                <th width="14%">Odds req.</th>
+                <th width="14%">Stake</th>
+                <th width="14%">Liability</th>
+                <th width="14%">Odds matched</th>
+                <th width="14%">Reduction</th>
+                <th width="14%">Actual Odds.</th>
+              </tr>
+
+              <tr id="txRowTemplate" style="display: none">
+                <td><span id="betTaken" class="small-date"></span></td>
+                <td id="txOddsReq"></td>
+                <td id="txStake"></td>
+                <td id="txLiability"></td>
+                <td id="txOddsMatched"></td>
+                <td id="reduction"></td>
+                <td id="actualOdds"></td>
+              </tr>
+            </tbody>
+          </table>
+        </td>
+      </tr>
+
+      <tr id="expandRowTemplate" class="expand" style="display: none">
+        <td colspan="2"></td>
+        <td colspan="8">
+          <img class="expand-arrow" src="assets/images/transparent.gif" />
+          <table id="txTableTemplate">
+            <tbody>
+              <tr>
+                <th>Bet taken</th>
+                <th width="16%">Odds req.</th>
+                <th width="17%">Stake</th>
+                <th width="24%">Liability</th>
+                <th width="24%">Odds matched</th>
+              </tr>
+
+              <tr id="txRowTemplate" style="display: none">
+                <td><span id="betTaken" class="small-date"></span></td>
+                <td id="txOddsReq"></td>
+                <td id="txStake"></td>
+                <td id="txLiability"></td>
+                <td id="txOddsMatched"></td>
+              </tr>
+            </tbody>
+          </table>
+        </td>
+      </tr>
+      <tr id="matchRow0" style="display: table-row">
+        <td class="align-L">
+          <a
+            id="betID"
+            href="javascript: void(0);"
+            class="expand-open"
+            onclick="BettingHistoryUtilHandler.toggleTx(0)"
+            >256809626</a
+          >
+        </td>
+        <td class="align-L" id="playerID">prabhu007</td>
+        <td id="matchTitle" class="align-L">
+          CRICKET<img class="fromto" src="assets/images/transparent.gif" /><strong
+            >Sunrisers Hyderabad v Kings XI Punjab</strong
+          ><img class="fromto" src="assets/images/transparent.gif" />FANCY_BET
+        </td>
+        <td id="matchSelection">SRH 20 Over Runs</td>
+        <td><span id="matchType" class="lay">No</span></td>
+        <td>
+          <span id="betPlaced" class="small-date">2020-10-08 21:07:30</span>
+        </td>
+        <td id="matchOddsReq">196/100</td>
+        <td id="matchStake">10.00</td>
+        <td id="matchAvgOdds">-</td>
+        <td>
+          <span id="pol" class="small-date"
+            ><span class="red">(10.00)</span></span
+          >
+        </td>
+        <td id="userCancel" style="display: none"></td>
+      </tr>
+      <tr id="expand0" class="expand" style="">
+        <td colspan="2"></td>
+        <td colspan="8">
+          <img class="expand-arrow" src="assets/images/transparent.gif" />
+          <table id="txTable0">
+            <tbody>
+              <tr>
+                <th>Bet taken</th>
+                <th width="16%">Odds req.</th>
+                <th width="17%">Stake</th>
+                <th width="24%">Liability</th>
+                <th width="24%">Odds matched</th>
+              </tr>
+
+              <tr id="txRowTemplate" style="display: none">
+                <td><span id="betTaken" class="small-date"></span></td>
+                <td id="txOddsReq"></td>
+                <td id="txStake"></td>
+                <td id="txLiability"></td>
+                <td id="txOddsMatched"></td>
+              </tr>
+              <tr id="txRow0" style="display: table-row" class="even">
+                <td>
+                  <span id="betTaken" class="small-date"
+                    >2020-10-08 21:07:30</span
+                  >
+                </td>
+                <td id="txOddsReq">196/100</td>
+                <td id="txStake">10.00</td>
+                <td id="txLiability"><span class="red">(10.00)</span></td>
+                <td id="txOddsMatched">196/100</td>
+              </tr>
+            </tbody>
+          </table>
+        </td>
+      </tr>
+      <tr id="matchRow1" style="display: table-row">
+        <td class="align-L">
+          <a
+            id="betID"
+            href="javascript: void(0);"
+            class="expand-close"
+            onclick="BettingHistoryUtilHandler.toggleTx(1)"
+            >256637058</a
+          >
+        </td>
+        <td class="align-L" id="playerID">prabhu007</td>
+        <td id="matchTitle" class="align-L">
+          CRICKET<img class="fromto" src="assets/images/transparent.gif" /><strong
+            >Sunrisers Hyderabad v Kings XI Punjab</strong
+          ><img class="fromto" src="assets/images/transparent.gif" />Match Odds
+        </td>
+        <td id="matchSelection">Sunrisers Hyderabad</td>
+        <td><span id="matchType" class="back">Back</span></td>
+        <td>
+          <span id="betPlaced" class="small-date">2020-10-08 21:05:51</span>
+        </td>
+        <td id="matchOddsReq">1.37</td>
+        <td id="matchStake">10.00</td>
+        <td id="matchAvgOdds">1.38</td>
+        <td><span id="pol" class="small-date">3.80</span></td>
+        <td id="userCancel" style="display: none"></td>
+      </tr>
+      <tr id="expand1" class="expand" style="display: none">
+        <td colspan="2"></td>
+        <td colspan="8">
+          <img class="expand-arrow" src="assets/images/transparent.gif" />
+          <table id="txTable1">
+            <tbody>
+              <tr>
+                <th>Bet taken</th>
+                <th width="16%">Odds req.</th>
+                <th width="17%">Stake</th>
+                <th width="24%">Liability</th>
+                <th width="24%">Odds matched</th>
+              </tr>
+
+              <tr id="txRowTemplate" style="display: none">
+                <td><span id="betTaken" class="small-date"></span></td>
+                <td id="txOddsReq"></td>
+                <td id="txStake"></td>
+                <td id="txLiability"></td>
+                <td id="txOddsMatched"></td>
+              </tr>
+              <tr id="txRow0" style="display: table-row" class="even">
+                <td>
+                  <span id="betTaken" class="small-date"
+                    >2020-10-08 21:05:51</span
+                  >
+                </td>
+                <td id="txOddsReq">1.37</td>
+                <td id="txStake">10.00</td>
+                <td id="txLiability">-</td>
+                <td id="txOddsMatched">1.38</td>
+              </tr>
+            </tbody>
+          </table>
+        </td>
+      </tr>
+      <tr id="matchRow2" style="display: table-row">
+        <td class="align-L">
+          <a
+            id="betID"
+            href="javascript: void(0);"
+            class="expand-close"
+            onclick="BettingHistoryUtilHandler.toggleTx(2)"
+            >256719889</a
+          >
+        </td>
+        <td class="align-L" id="playerID">prabhu007</td>
+        <td id="matchTitle" class="align-L">
+          CRICKET<img class="fromto" src="assets/images/transparent.gif" /><strong
+            >Sunrisers Hyderabad v Kings XI Punjab</strong
+          ><img class="fromto" src="assets/images/transparent.gif" />FANCY_BET
+        </td>
+        <td id="matchSelection">Jonny Bairstow Runs</td>
+        <td><span id="matchType" class="lay">No</span></td>
+        <td>
+          <span id="betPlaced" class="small-date">2020-10-08 20:34:07</span>
+        </td>
+        <td id="matchOddsReq">95/110</td>
+        <td id="matchStake">10.00</td>
+        <td id="matchAvgOdds">-</td>
+        <td>
+          <span id="pol" class="small-date"
+            ><span class="red">(11.00)</span></span
+          >
+        </td>
+        <td id="userCancel" style="display: none"></td>
+      </tr>
+      <tr id="expand2" class="expand" style="display: none">
+        <td colspan="2"></td>
+        <td colspan="8">
+          <img class="expand-arrow" src="assets/images/transparent.gif" />
+          <table id="txTable2">
+            <tbody>
+              <tr>
+                <th>Bet taken</th>
+                <th width="16%">Odds req.</th>
+                <th width="17%">Stake</th>
+                <th width="24%">Liability</th>
+                <th width="24%">Odds matched</th>
+              </tr>
+
+              <tr id="txRowTemplate" style="display: none">
+                <td><span id="betTaken" class="small-date"></span></td>
+                <td id="txOddsReq"></td>
+                <td id="txStake"></td>
+                <td id="txLiability"></td>
+                <td id="txOddsMatched"></td>
+              </tr>
+              <tr id="txRow0" style="display: table-row" class="even">
+                <td>
+                  <span id="betTaken" class="small-date"
+                    >2020-10-08 20:34:07</span
+                  >
+                </td>
+                <td id="txOddsReq">95/110</td>
+                <td id="txStake">10.00</td>
+                <td id="txLiability"><span class="red">(11.00)</span></td>
+                <td id="txOddsMatched">95/110</td>
+              </tr>
+            </tbody>
+          </table>
+        </td>
+      </tr>
+      <tr id="matchRow3" style="display: table-row">
+        <td class="align-L">
+          <a
+            id="betID"
+            href="javascript: void(0);"
+            class="expand-close"
+            onclick="BettingHistoryUtilHandler.toggleTx(3)"
+            >256698866</a
+          >
+        </td>
+        <td class="align-L" id="playerID">prabhu007</td>
+        <td id="matchTitle" class="align-L">
+          CRICKET<img class="fromto" src="assets/images/transparent.gif" /><strong
+            >Sunrisers Hyderabad v Kings XI Punjab</strong
+          ><img class="fromto" src="assets/images/transparent.gif" />FANCY_BET
+        </td>
+        <td id="matchSelection">David Warner Runs</td>
+        <td><span id="matchType" class="lay">No</span></td>
+        <td>
+          <span id="betPlaced" class="small-date">2020-10-08 20:23:37</span>
+        </td>
+        <td id="matchOddsReq">65/100</td>
+        <td id="matchStake">10.00</td>
+        <td id="matchAvgOdds">-</td>
+        <td><span id="pol" class="small-date">10.00</span></td>
+        <td id="userCancel" style="display: none"></td>
+      </tr>
+      <tr id="expand3" class="expand" style="display: none">
+        <td colspan="2"></td>
+        <td colspan="8">
+          <img class="expand-arrow" src="assets/images/transparent.gif" />
+          <table id="txTable3">
+            <tbody>
+              <tr>
+                <th>Bet taken</th>
+                <th width="16%">Odds req.</th>
+                <th width="17%">Stake</th>
+                <th width="24%">Liability</th>
+                <th width="24%">Odds matched</th>
+              </tr>
+
+              <tr id="txRowTemplate" style="display: none">
+                <td><span id="betTaken" class="small-date"></span></td>
+                <td id="txOddsReq"></td>
+                <td id="txStake"></td>
+                <td id="txLiability"></td>
+                <td id="txOddsMatched"></td>
+              </tr>
+              <tr id="txRow0" style="display: table-row" class="even">
+                <td>
+                  <span id="betTaken" class="small-date"
+                    >2020-10-08 20:23:37</span
+                  >
+                </td>
+                <td id="txOddsReq">65/100</td>
+                <td id="txStake">10.00</td>
+                <td id="txLiability"><span class="red">(10.00)</span></td>
+                <td id="txOddsMatched">65/100</td>
+              </tr>
+            </tbody>
+          </table>
+        </td>
+      </tr>
+    </tbody>
+  </table>
+</div>
+
+<pagination-template #pagination="paginationApi">
+  <ul id="pageNumberContent" class="pages">
+    <li id="prev">
+      <a
+        href="javascript:void(0);"
+        class="disable"
+        (click)="pagination.previous()"
+        >Prev</a
+      >
+    </li>
+    <li id="pageNumber">
+      <ng-template *ngFor="let page of pagination.pages">
+        <!-- <a
+          (click)="pagination.setCurrent(page.value)"
+          *ngIf="pagination.getCurrent() != page.value"
+          style="pointer-events: none"
+          >{{ page.value }}
+        </a> -->
+        <!-- <a
+          *ngIf="pagination.getCurrent() == page.value"
+          class="select"
+          style="pointer-events: none"
+          >{{ page.value }}
+        </a> -->
+      </ng-template>
+
+      <a class="select" style="pointer-events: none">1 </a>
+    </li>
+    <!-- <li id="pageNumber"><a href="javascript:void(0);">2</a></li> -->
+    <li id="next">
+      <a
+        href="javascript:void(0);"
+        [class.disabled]="pagination.isLastPage()"
+        (click)="pagination.next()"
+        >Next</a
+      >
+    </li>
+  </ul>
+</pagination-template>

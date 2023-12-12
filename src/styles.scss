@@ -1,0 +1,201 @@
+/* You can add global styles to this file, and also import other style files */
+@import "vars";
+@import "assets/scss/sky";
+@import '~ngx-toastr/toastr';
+@import url(https://stackpath.bootstrapcdn.com/font-awesome/4.7.0/css/font-awesome.min.css);
+/* Importing Bootstrap SCSS file. */
+// @import '~bootstrap/scss/bootstrap';
+
+html,
+body {
+  height: 100%;
+  font-family: Tahoma, Helvetica, sans-serif;
+  color: #1e1e1e;
+  font-size: 12px;
+  line-height: 15px;
+  min-width: 1350px;
+}
+
+body {
+  background-color: #f0ece1;
+}
+
+* {
+  margin: 0;
+  padding: 0;
+  box-sizing: border-box;
+}
+
+.spacer {
+  flex: 1;
+}
+
+ul {
+  list-style: none;
+  margin: 0;
+}
+
+a {
+  text-decoration: none;
+}
+
+.main_wrap,
+.header,
+.footer-content {
+  width: 1350px;
+  margin: 0 auto;
+  position: relative;
+}
+
+dp-date-picker.dp-material .dp-picker-input {
+  box-sizing: border-box;
+  font-size: 13px;
+  height: 25px !important;
+  outline: none;
+  width: 110px !important;
+  cursor: pointer;
+
+  background-image: url("./assets/images/sprite/report-sf227858fbc.png");
+  background-repeat: no-repeat;
+  background-position: 100% -23px !important;
+}
+
+.download-reports {
+  display: flex;
+  justify-content: flex-end;
+  // margin: 4px 0;
+
+  & > button {
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    height: 28px;
+    width: 28px;
+    margin: 0 2px;
+    padding: 0;
+  }
+
+  img {
+    height: 24px;
+    width: 24px;
+    transform: scale(0.8);
+  }
+
+  .excel img {
+    background-image: url("./assets/images/export-excel.png");
+  }
+
+  .pdf img {
+    background-image: url("./assets/images/export-pdf.png");
+  }
+
+  .csv img {
+    background-image: url("./assets/images/export-csv.png");
+  }
+}
+
+.must {
+  font-size: 13px;
+  color: #d0021b;
+}
+
+.xyz {
+  position: relative;
+  display: inline-block;
+  width: 30px;
+  height: 15px;
+
+  input {
+    opacity: 0;
+    width: 0;
+    height: 0;
+  }
+}
+
+input:checked + .slider {
+  background-color: #00dc61;
+
+  &:before {
+    -webkit-transform: translateX(26px);
+    -ms-transform: translateX(26px);
+    transform: translateX(26px);
+  }
+}
+
+.slider {
+  position: absolute;
+  cursor: pointer;
+  top: 0;
+  left: 0;
+  right: 0;
+  bottom: 0;
+  background-color: #e82929;
+  -webkit-transition: 0.4s;
+  transition: 0.4s;
+
+  &.round:before {
+    border-radius: 50%;
+  }
+
+  &:before {
+    position: absolute;
+    content: "";
+    height: 15px;
+    width: 14px;
+    left: -5px;
+    /* bottom: 4px; */
+    background-color: rgb(255, 255, 255);
+    box-shadow: 0px 1px 3px 0px rgba($color: #000000, $alpha: 0.3);
+    transition: 0.4s;
+  }
+}
+
+.slider.round {
+  border-radius: 34px;
+}
+
+[role="button"],
+a,
+area,
+button,
+input,
+label,
+select,
+summary,
+textarea {
+  touch-action: manipulation;
+}
+
+.table-pt {
+  td {
+    padding: 4px 3px;
+  }
+  th,
+  td {
+    border-right: 1px solid rgba($color: #000000, $alpha: 0.1);
+  }
+}
+
+.fa-2x {
+  font-size: 1.5em;
+}
+
+.function-wrap {
+  input[type="text"],
+  input[type="number"] select {
+    // margin: 0;
+  }
+
+  & > div {
+    display: flex;
+    margin-bottom: 8px;
+
+    & > * {
+      margin-right: 8px;
+    }
+  }
+}
+
+.conatiner {
+  margin-bottom: 8px;
+}

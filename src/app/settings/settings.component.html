@@ -1,0 +1,356 @@
+<div class="full-wrap">
+  <form [formGroup]="settingForm" (ngSubmit)="submit()">
+    <div class="main_wrap">
+      <h2>Settings</h2>
+      <div class="function-wrap">
+        <ul class="input-list">
+          <li>
+            <input
+              type="radio"
+              name="typeWise"
+              value="default"
+              (change)="setTypeWise($event.target.value)"
+              formControlName="typeWise"
+            />Default
+            <input
+              type="radio"
+              name="typeWise"
+              value="sport"
+              (change)="setTypeWise($event.target.value)"
+              formControlName="typeWise"
+            />Sports Wise
+            <input
+              type="radio"
+              name="typeWise"
+              value="event"
+              (change)="setTypeWise($event.target.value)"
+              formControlName="typeWise"
+            />Event Wise
+            <input
+              type="radio"
+              name="typeWise"
+              value="market"
+              (change)="setTypeWise($event.target.value)"
+              formControlName="typeWise"
+            />Market Wise
+          </li>
+
+        </ul>
+        <ul class="input-list">
+          <li>
+            <input
+              type="radio"
+              value="default"
+              name="usersWise"
+              checked="true"
+              (change)="setUsersWise($event)"
+            />Default
+            <ng-container *ngFor="let level of hierarchyList">
+              <input
+                type="radio"
+                name="usersWise"
+                value="{{ level.name }}"
+                (change)="setUsersWise($event, level.name + 'Select')"
+              />
+              {{ level.name | titlecase }} Wise
+            </ng-container>
+          </li>
+        </ul>
+        <ul class="input-list">
+          <li>
+            <select
+              name="value"
+              formControlName="value"
+              id="sportSelect"
+              (change)="selectSport($event.target.value)"
+              *ngIf="settingForm.value.typeWise === 'sport'"
+            >
+              <option value="0">Select Sport</option>
+              <option value="4">Cricket</option>
+              <option value="1">Soccer</option>
+              <option value="2">Tennis</option>
+            </select>
+            <select
+              name="value"
+              formControlName="value"
+              id="sportSelect"
+              (change)="selectEvent($event.target.value)"
+              *ngIf="settingForm.value.typeWise === 'event'"
+            >
+              <option value="0">Select Event</option>
+              <option value="1">Sri Lanka v India</option>
+              <option value="2">Australia v Sri Lanka</option>
+              <option value="3">New Zealand v Bangladesh</option>
+            </select>
+            <select
+              name="value"
+              formControlName="value"
+              id="sportMarket"
+              (change)="selectMarket($event.target.value)"
+              *ngIf="settingForm.value.typeWise === 'market'"
+            >
+              <option value="0">Select Market</option>
+              <option value="1">Match Odds</option>
+              <option value="2">Fancy Bets</option>
+              <option value="3">Book Maker</option>
+            </select>
+            <ng-container *ngFor="let level of hierarchyList">
+              <select
+                name="value"
+                formControlName="userId"
+                id="{{ level.name }}Select"
+                class="user-wise"
+                style="display: none"
+              >
+                <option value="0">Select {{ level.name | titlecase }}</option>
+                <option
+                  [value]="u.userId"
+                  *ngFor="let u of usersListMap[level.id]"
+                >
+                  {{ u.userName }}
+                </option>
+              </select>
+            </ng-container>
+          </li>
+        </ul>
+      </div>
+      <div class="container settings-container">
+        <div *ngIf="showLimitSettings" formGroupName="limitSetting">
+          <h2>Limit Setting</h2>
+          <div class="grid">
+            <div class="input-group">
+              <label for="exposure-limit">Exposure Limit: </label>
+              <input
+                type="number"
+                formControlName="exposureLimit"
+                placeholder="Enter exposure limit"
+              />
+            </div>
+            <div class="input-group">
+              <label for="">Bookmaking commission: </label>
+              <input
+                type="number"
+                formControlName="bookmakingCommission"
+                placeholder="Enter Bookmaking commission"
+              />
+            </div>
+            <!--
+            <div class="input-group">
+              <label for="">PNL(%): </label>
+              <input type="number" placeholder="Enter PNL" />
+            </div> -->
+
+            <div class="input-group">
+              <label for="">Match Odds Commission: </label>
+              <input
+                type="number"
+                formControlName="matchOddsCommission"
+                placeholder="Enter Match Odds Commission"
+              />
+            </div>
+
+            <div class="input-group">
+              <label for="">Bet Delay[Second]: </label>
+              <input
+                type="number"
+                formControlName="betDelay"
+                placeholder="Enter Bet Delay"
+              />
+            </div>
+
+            <div class="input-group">
+              <label for="">Fancy commission: </label>
+              <input
+                type="number"
+                formControlName="fancyCommission"
+                placeholder="Enter fancy Commission"
+              />
+            </div>
+
+            <div class="input-group">
+              <label for="">Fancy Bonus: </label>
+              <input
+                type="number"
+                formControlName="fancyBonus"
+                placeholder="Enter Fancy Bonus"
+              />
+            </div>
+            <span></span>
+
+            <!-- <div class="input-group">
+              <label for="">Exchange Rate: </label>
+              <input type="number" placeholder="Enter Exchange Rate" />
+            </div> -->
+          </div>
+        </div>
+        <div *ngIf="showMarketSettings" formGroupName="marketSetting">
+          <h2>Market Setting</h2>
+          <div class="grid">
+            <div class="input-group">
+              <label for="">Bet Min Rate<span class="must">*</span>: </label>
+              <input
+                type="number"
+                formControlName="betMinRate"
+                placeholder="Enter Bet Min Rate"
+              />
+            </div>
+            <div class="input-group">
+              <label for="">Commssion(%)<span class="must">*</span>: </label>
+              <input
+                type="number"
+                formControlName="commission"
+                placeholder="Enter Bet Min Rate"
+              />
+            </div>
+
+            <div class="input-group">
+              <label for="">Bet Max Rate(%)<span class="must">*</span>: </label>
+              <input
+                type="number"
+                formControlName="betMaxRate"
+                placeholder="Enter Bet Max Rate"
+              />
+            </div>
+            <div class="input-group">
+              <label for=""
+                >Volume Multiplier(%)<span class="must">*</span>:
+              </label>
+              <input
+                type="number"
+                formControlName="volMultiplier"
+                placeholder="Enter Volume Multiplier"
+              />
+            </div>
+
+            <div class="input-group">
+              <label for="">Min Stake(%)<span class="must">*</span>: </label>
+              <input
+                type="number"
+                formControlName="minStake"
+                placeholder="Enter Min Stake"
+              />
+            </div>
+            <div class="input-group">
+              <label for="">Max Stake(%)<span class="must">*</span>: </label>
+              <input
+                type="number"
+                formControlName="maxStake"
+                placeholder="Enter Max Stake"
+              />
+            </div>
+
+            <div class="input-group">
+              <label for="">Max Profit(%)<span class="must">*</span>: </label>
+              <input
+                type="number"
+                formControlName="maxProfit"
+                placeholder="Enter Max Profit"
+              />
+            </div>
+            <div class="input-group">
+              <label for="">Max Loss(%)<span class="must">*</span>: </label>
+              <input
+                type="number"
+                name=""
+                formControlName="maxLoss"
+                placeholder="Enter Max Loss"
+              />
+            </div>
+
+            <!-- <div class="input-group">
+              <label for="" style="display: flex">
+                <input type="checkbox" name=""  /> Is Unmatched Allowed
+              </label>
+              <label for="">
+                <input type="checkbox" name=""  /> Is Check Volume
+              </label>
+            </div> -->
+            <div class="input-group">
+              <label for=""
+                >Market Before Inplay Limit(%)<span class="must">*</span>:
+              </label>
+              <input
+                type="number"
+                formControlName="marketBeforeInplayLimit"
+                placeholder="Enter Market Before Inplay Limit"
+              />
+            </div>
+
+            <!-- <label for="">
+              <input type="checkbox" name=""  /> Is Market Wise
+            </label> -->
+          </div>
+        </div>
+        <div *ngIf="showSessionSettings" formGroupName="sessionSetting">
+          <h2>Session Setting</h2>
+          <div class="grid">
+            <div class="input-group">
+              <label for="">Min Stake<span class="must">*</span>: </label>
+              <input
+                type="number"
+                name=""
+                formControlName="minStake"
+                placeholder="Enter Min Stake"
+              />
+            </div>
+            <div class="input-group">
+              <label for="">Max Loss<span class="must">*</span>: </label>
+              <input
+                type="number"
+                name=""
+                formControlName="maxStake"
+                placeholder="Enter Max Loss"
+              />
+            </div>
+
+            <div class="input-group">
+              <label for="">Max Profit<span class="must">*</span>: </label>
+              <input
+                type="number"
+                name=""
+                formControlName="maxProfit"
+                placeholder="Enter Max Profit"
+              />
+            </div>
+            <div class="input-group">
+              <label for=""
+                >Per Rate Max Stake<span class="must">*</span>:
+              </label>
+              <input
+                type="number"
+                name=""
+                formControlName="perRateMaxStake"
+                placeholder="Enter Per Rate Max Stake"
+              />
+            </div>
+
+            <div class="input-group">
+              <label for="">Commission(%)<span class="must">*</span>: </label>
+              <input
+                type="number"
+                name=""
+                formControlName="commission"
+                placeholder="Enter Commission"
+              />
+            </div>
+            <span></span>
+
+            <div class="input-group">
+              <label for="">Max Stake<span class="must">*</span>: </label>
+              <input
+                type="number"
+                name=""
+                formControlName="maxStake"
+                placeholder="Enter Max Stake"
+              />
+            </div>
+          </div>
+        </div>
+      </div>
+      <div class="btn_box">
+        <button type="submit" class="btn-send">Save & Close</button>
+        <button class="btn">Cancel</button>
+      </div>
+    </div>
+  </form>
+</div>

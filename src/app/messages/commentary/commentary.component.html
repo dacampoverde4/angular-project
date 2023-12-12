@@ -1,0 +1,159 @@
+<div class="main_wrap">
+  <h2>Commentary</h2>
+  <div class="function-wrap">
+    <div>
+      <label for="sport">Sport: </label>
+      <select name="sport" id="sport">
+        <option value="0">Select Sport</option>
+        <option value="1">Soccer</option>
+        <option value="2">Tennis</option>
+        <option value="3">Cricket</option>
+      </select>
+      <button class="btn">Delete</button>
+      <span class="spacer"></span>
+      <a (click)="openAddNewModal()" class="btn-send">Add New</a>
+    </div>
+
+    <div>
+      <span class="spacer"></span>
+      <p class="vertical-align: middle">Total Records: 4</p>
+    </div>
+  </div>
+  <div class="total_all">
+    <div class="spacer"></div>
+    <div class="download-reports">
+      <button class="excel btn" title="Export Excel">
+        <img src="assets/images/transparent.gif" alt="" />
+      </button>
+      <button class="pdf btn" title="Export Pdf">
+        <img src="assets/images/transparent.gif" alt="" />
+      </button>
+      <button class="csv btn" title="Export Csv">
+        <img src="assets/images/transparent.gif" alt="" />
+      </button>
+    </div>
+  </div>
+  <div class="table-container">
+    <table class="table01">
+      <thead>
+        <tr class="ng-table-sort-header">
+          <th width="3%">
+            <div ng-if="template" ng-include="template">
+              <input
+                type="checkbox"
+                id="select_all"
+                name="filter-checkbox"
+                value=""
+              />
+            </div>
+          </th>
+          <th width="3%">Edit</th>
+          <th width="20%" class="align-C">Sport</th>
+          <th class="align-C">Commentary</th>
+          <th width="8%" class="align-C">Show Text</th>
+          <th width="8%" class="align-C">Is Active</th>
+        </tr>
+      </thead>
+
+      <tbody>
+        <tr *ngFor="let l of [1, 1]">
+          <td>
+            <input
+              type="checkbox"
+              value="1"
+              data-ng-class="checkAll"
+              aria-label="checkbox"
+              class="ng-pristine ng-untouched ng-valid ng-empty"
+            />
+          </td>
+
+          <td title=" 'Edit' ">
+            <a (click)="openAddNewModal()">
+              <i class="fa fa-pencil-square-o fa-2x"></i>
+            </a>
+          </td>
+
+          <td title=" 'Sport' " class="align-C">1</td>
+
+          <td title=" 'Commentary' " class="align-C">
+            Welcome to Skysports365
+          </td>
+
+          <td title="'Show Text'" class="align-C">asdfas</td>
+
+          <td width="8%" title=" 'IsActive' " class="align-C">
+            <a *ngIf="true">
+              <i class="fa fa-check-circle fa-2x" style="color: green"></i>
+            </a>
+          </td>
+        </tr>
+      </tbody>
+    </table>
+  </div>
+</div>
+
+<pagination-template #pagination="paginationApi">
+  <ul id="pageNumberContent" class="pages">
+    <li id="prev">
+      <a class="disable" (click)="pagination.previous()">Prev</a>
+    </li>
+    <li id="pageNumber">
+      <ng-template *ngFor="let page of pagination.pages">
+        <!-- <a
+          (click)="pagination.setCurrent(page.value)"
+          *ngIf="pagination.getCurrent() != page.value"
+          style="pointer-events: none"
+          >{{ page.value }}
+        </a> -->
+        <!-- <a
+          *ngIf="pagination.getCurrent() == page.value"
+          class="select"
+          style="pointer-events: none"
+          >{{ page.value }}
+        </a> -->
+      </ng-template>
+
+      <a class="select" style="pointer-events: none">1 </a>
+    </li>
+    <!-- <li id="pageNumber"><a href="javascript:void(0);">2</a></li> -->
+    <li id="next">
+      <a [class.disabled]="pagination.isLastPage()" (click)="pagination.next()"
+        >Next</a
+      >
+    </li>
+  </ul>
+</pagination-template>
+
+<app-modal [(open)]="isAddNewModalOpen">
+  <div class="modal-header">
+    <h3>Add New Commentary</h3>
+  </div>
+  <div class="modal-content">
+    <div class="ticker-details">
+      <div class="commentary-detail">
+        <div class="input-group">
+          <select name="sport" id="sport" [(ngModel)]="newCommentary.sportName">
+            <option value="" disabled>Select Sport</option>
+            <option value="Cricket">Cricket</option>
+            <option value="Soccer">Soccer</option>
+            <option value="Tennis">Tennis</option>
+          </select>
+        </div>
+        <div>
+          <input type="text" placeholder="Name" [(ngModel)]="newCommentary.commentary">
+        </div>
+      </div>
+      <textarea placeholder="Description" name="desc" id="desc" rows="5" [(ngModel)]="newCommentary.description"></textarea>
+      <div class="container">
+        <label for="isActive">
+          <input type="checkbox" name="isActive" id="isActive" /> Is Active
+        </label>
+      </div>
+    </div>
+  </div>
+  <div class="modal-footer">
+    <div class="btn_box">
+      <button class="btn-send" (click)="addCommentary()">Add New</button>
+    </div>
+  </div>
+</app-modal>

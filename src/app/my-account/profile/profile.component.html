@@ -1,0 +1,114 @@
+<h2>Profile</h2>
+<div class="event-left">
+  <div class="profile-wrap">
+    <h3>About You</h3>
+    <dl>
+      <dt>First Name</dt>
+      <dd></dd>
+
+      <dt>Last Name</dt>
+      <dd></dd>
+
+      <dt>Birthday</dt>
+      <dd></dd>
+
+      <dt>E-mail</dt>
+      <dd>Nsnzn@gmail.com</dd>
+
+      <dt>Password</dt>
+      <dd class="edit-pass">
+        ********************************
+        <a
+          class="favor-set"
+          (click)="openChangePassModal()"
+          >Edit</a
+        >
+      </dd>
+
+      <dt>Time Zone</dt>
+      <dd>IST</dd>
+
+      <dt>Languages</dt>
+      <dd>
+        <select id="lang">
+          <option value="en" selected="">English</option>
+
+          <option value="cn">中文</option>
+        </select>
+      </dd>
+    </dl>
+  </div>
+</div>
+<div class="event-right">
+  <div class="profile-wrap">
+    <h3>Contact Details</h3>
+    <dl>
+      <dt>Primary number</dt>
+      <dd></dd>
+    </dl>
+  </div>
+  <div class="profile-wrap" style="display: none">
+    <h3>PT</h3>
+    <dl>
+      <dt>My PT Allowed</dt>
+      <dd>0%</dd>
+    </dl>
+    <dl>
+      <dt>My Fancy Bet PT</dt>
+      <dd>0%</dd>
+    </dl>
+    <dl>
+      <dt>Sportsbook PT</dt>
+      <dd>0%</dd>
+    </dl>
+    <dl>
+      <dt>Sportsbook Premium PT</dt>
+      <dd>0%</dd>
+    </dl>
+    <dl>
+      <dt>My Book Maker PT</dt>
+      <dd>0%</dd>
+    </dl>
+    <dl>
+      <dt>Casino PT Allowed</dt>
+      <dd>LIVE: 0%, RNG: 0%, SLOT: 0%, VIRTUAL: 0%</dd>
+    </dl>
+  </div>
+</div>
+
+<app-modal [(open)]="changePassModalOpen">
+  <div class="modal-header">
+    <h3>Change Password</h3>
+  </div>
+  <div class="modal-content">
+    <dl class="form_list">
+      <dt>New Password</dt>
+      <dd>
+        <input
+          id="newPassword"
+          type="password"
+          placeholder="Enter"
+          aria-autocomplete="list"
+        />
+        <span class="must">＊</span>
+        <span id="newPasswordErrorText" class="error-text"></span>
+      </dd>
+      <dt>Confirm Password</dt>
+      <dd>
+        <input id="newPasswordConfirm" type="password" placeholder="Enter" />
+        <span class="must">＊</span>
+        <span id="newPasswordConfirmErrorText" class="error-text"></span>
+      </dd>
+      <dt>Your Password</dt>
+      <dd>
+        <input id="changePassword" type="password" placeholder="Enter" />
+        <span class="must">＊</span>
+      </dd>
+      <dd>
+        <a id="changePasswordBtn" href="javascript: void(0)" class="btn-send"
+          >Change</a
+        >
+      </dd>
+    </dl>
+  </div>
+</app-modal>

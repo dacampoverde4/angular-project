@@ -1,0 +1,190 @@
+<div class="full-wrap">
+  <div class="main_wrap">
+    <div class="total_all">
+      <h2>Login Details</h2>
+      <div class="spacer"></div>
+      <div class="download-reports">
+        <button class="excel btn" title="Export Excel">
+          <img src="assets/images/transparent.gif" alt="" />
+        </button>
+        <button class="pdf btn" title="Export Pdf">
+          <img src="assets/images/transparent.gif" alt="" />
+        </button>
+        <button class="csv btn" title="Export Csv">
+          <img src="assets/images/transparent.gif" alt="" />
+        </button>
+      </div>
+    </div>
+  </div>
+  <div class="main_wrap">
+    <ul class="report-tab-wrap" style="display: block">
+      <li
+        class="report-tab"
+        id="reportType_exchange"
+        [class.select]="selectedTabIndex === 0"
+        (click)="selectTab(0)"
+      >
+        Same IP
+      </li>
+
+      <li
+        class="report-tab"
+        id="reportType_casino"
+        [class.select]="selectedTabIndex === 1"
+        (click)="selectTab(1)"
+      >
+        Different IP
+      </li>
+
+      <li
+        class="report-tab"
+        id="reportType_sportsBook"
+        [class.select]="selectedTabIndex === 2"
+        (click)="selectTab(2)"
+      >
+        Unsuccessful
+      </li>
+    </ul>
+    <div class="table-container">
+      <table
+        *ngIf="selectedTabIndex === 0"
+        id="testttt"
+        class="table01"
+        style="text-align: center; white-space: nowrap"
+      >
+        <thead>
+          <tr>
+            <th>User Name</th>
+            <th>Login Date &amp; Time</th>
+            <th>Login Status</th>
+            <th>IP Address</th>
+            <th>ISP</th>
+            <th>City/State/Country</th>
+            <th>Info</th>
+            <th>Imei address</th>
+            <th>Mobile model /browser version</th>
+            <th>Machine id</th>
+          </tr>
+        </thead>
+
+        <tbody>
+          <!-- ngRepeat: loginologout in $data -->
+          <tr class="ng-scope" *ngFor="let l of [1, 1, 1, 1]">
+            <td>demomdl</td>
+            <td>2018-12-08 21:10:19</td>
+            <td>Login Success</td>
+            <td>103.216.212.23</td>
+            <td>Snet Nertwork Private Limited</td>
+            <td>Mumbai,Maharashtra,IN</td>
+            <td title="'Info'" data-title-text="Info">
+              <!-- ngIf: bet.source!='web' --><a style="font-weight: bolder"
+                ><i class="fa fa-mobile fa-2x" aria-hidden="true"></i></a
+              ><!-- end ngIf: bet.source!='web' -->
+            </td>
+            <td title="'Imei address'">49-015420-323751-8</td>
+
+            <td title="'Mobile model /browser version'">71.0.3578.98</td>
+            <td title="'Machine id'">02-50-F2-6E-AF-0C</td>
+          </tr>
+        </tbody>
+      </table>
+
+      <table
+        *ngIf="selectedTabIndex === 1"
+        id="testttt"
+        class="table01"
+        style="text-align: center; white-space: nowrap"
+      >
+        <thead>
+          <tr>
+            <th>User Name</th>
+            <th>IP Address</th>
+            <th>Imei address</th>
+            <th>Mobile model /browser version</th>
+            <th>Machine id</th>
+          </tr>
+        </thead>
+
+        <tbody>
+          <!-- ngRepeat: loginologout in $data -->
+          <tr class="ng-scope" *ngFor="let l of [1, 1, 1, 1]">
+            <td>demomdl</td>
+            <td>103.216.212.23</td>
+            <td title="'Imei address'">49-015420-323751-8</td>
+            <td title="'Mobile model /browser version'">71.0.3578.98</td>
+            <td title="'Machine id'">02-50-F2-6E-AF-0C</td>
+          </tr>
+        </tbody>
+      </table>
+      <table
+        *ngIf="selectedTabIndex === 2"
+        class="table01 unsuccessful"
+        style="text-align: center; white-space: nowrap"
+      >
+        <thead>
+          <tr>
+            <th>User Name</th>
+            <th>Login Date & Time</th>
+            <th>Login Status</th>
+            <th>IP Address</th>
+            <th>Action</th>
+          </tr>
+        </thead>
+
+        <tbody>
+          <!-- ngRepeat: loginologout in $data -->
+          <tr class="ng-scope" *ngFor="let l of [1, 1, 1, 1]">
+            <td>demomdl</td>
+            <td>2018-12-08 21:10:19</td>
+            <td>Unsuccessful</td>
+            <td>103.216.212.23</td>
+            <td>
+              <button class="btn">B</button>
+              <button class="btn">Reset</button>
+            </td>
+          </tr>
+        </tbody>
+      </table>
+    </div>
+  </div>
+</div>
+
+<pagination-template #pagination="paginationApi">
+  <ul id="pageNumberContent" class="pages">
+    <li id="prev">
+      <a
+        href="javascript:void(0);"
+        class="disable"
+        (click)="pagination.previous()"
+        >Prev</a
+      >
+    </li>
+    <li id="pageNumber">
+      <ng-template *ngFor="let page of pagination.pages">
+        <!-- <a
+          (click)="pagination.setCurrent(page.value)"
+          *ngIf="pagination.getCurrent() != page.value"
+          style="pointer-events: none"
+          >{{ page.value }}
+        </a> -->
+        <!-- <a
+          *ngIf="pagination.getCurrent() == page.value"
+          class="select"
+          style="pointer-events: none"
+          >{{ page.value }}
+        </a> -->
+      </ng-template>
+
+      <a class="select" style="pointer-events: none">1 </a>
+    </li>
+    <!-- <li id="pageNumber"><a href="javascript:void(0);">2</a></li> -->
+    <li id="next">
+      <a
+        href="javascript:void(0);"
+        [class.disabled]="pagination.isLastPage()"
+        (click)="pagination.next()"
+        >Next</a
+      >
+    </li>
+  </ul>
+</pagination-template>

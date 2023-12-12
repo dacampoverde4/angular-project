@@ -1,0 +1,69 @@
+<div class="login-wrap">
+  <div class="kv"></div>
+
+  <form class="login-panel" [formGroup]="loginForm" (ngSubmit)="login()">
+    <div class="header">Agent Login</div>
+    <input
+      formControlName="userName"
+      id="loginName"
+      type="text"
+      placeholder="Username"
+      required
+    />
+    <input
+      formControlName="password"
+      id="password"
+      type="password"
+      placeholder="Password"
+      required
+    />
+    <div class="captcha-group">
+      <input
+        formControlName="captcha"
+        id="captha"
+        type="text"
+        placeholder="Captcha"
+        required
+      />
+      <img [src]="captchaImg" alt="" />
+    </div>
+    <button type="submit" class="btn-send">
+      Login <img class="icon-login" src="assets/images/transparent.gif" />
+    </button>
+    <span id="errorMsg" class="error" *ngIf="loginForm.invalid || serverError"
+      >{{ errorMsg }}
+    </span>
+  </form>
+
+  <!-- <dl class="login-panel">
+    <dt>Agent login</dt>
+    <dd><input id="loginName" type="text" placeholder="Username" /></dd>
+    <dd><input id="password" type="password" placeholder="Password" /></dd>
+    <dd class="valid-code">
+      <input
+        id="validCode"
+        type="text"
+        placeholder="Validation Code"
+        maxlength="4"
+      />
+    </dd>
+    <dd>
+      <input
+        id="valid"
+        name="valid"
+        type="hidden"
+      />
+    </dd>
+    <dd>
+      <a
+        id="loginBtn"
+        href="#"
+        class="btn-send"
+        onclick="javascript: return LoginHandler.check(event);"
+        >Login
+        <img class="icon-login" src="assets/images/transparent.gif"
+      /></a>
+    </dd>
+    <dd id="errorMsg" class="error" style="display: none"></dd>
+  </dl> -->
+</div>

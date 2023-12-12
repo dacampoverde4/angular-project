@@ -1,0 +1,335 @@
+<h2>Account Summary</h2>
+<ul class="acc-info">
+  <li class="user">prabhu007</li>
+  <li class="status_all">
+    <strong id="status"></strong>
+  </li>
+</ul>
+<table class="table01">
+  <tbody>
+    <tr>
+      <th width="20%" class="align-L">Wallet</th>
+
+      <th width="25%">Available to Bet</th>
+      <th width="">Funds available to withdraw</th>
+      <th width="25%">Current exposure</th>
+    </tr>
+
+    <tr>
+      <td class="align-L">Main wallet</td>
+
+      <td id="availableToBet">62.72</td>
+      <td id="availableToWithDraw">62.72</td>
+      <td id="currentExposure">0.00</td>
+    </tr>
+  </tbody>
+</table>
+<h2>Profile</h2>
+<div class="event-left">
+  <div class="profile-wrap">
+    <h3>About You</h3>
+    <dl>
+      <dt>First Name</dt>
+      <dd></dd>
+
+      <dt>Last Name</dt>
+      <dd></dd>
+
+      <dt>Birthday</dt>
+      <dd></dd>
+
+      <dt>E-mail</dt>
+      <dd>xyz@gmail.com</dd>
+
+      <dt>Password</dt>
+      <dd>
+        ********************************
+
+        <a class="favor-set" (click)="openChangePassModal()">Edit</a>
+      </dd>
+
+      <dt>Time Zone</dt>
+      <dd>IST</dd>
+    </dl>
+  </div>
+
+  <div class="profile-wrap">
+    <h3>Contact Details</h3>
+    <dl>
+      <dt>Primary number</dt>
+      <dd></dd>
+    </dl>
+  </div>
+</div>
+
+<div class="event-right">
+  <div class="profile-wrap">
+    <h3>Limits &amp; Commission</h3>
+    <dl>
+      <dt>Exposure Limit</dt>
+      <dd id="mainwalletExposureLimit">60.00</dd>
+
+      <dt>Commission</dt>
+      <dd>
+        <span id="commission">2.0%</span>
+        <a class="favor-set" (click)="openChangeCommissionModal()">Edit</a>
+      </dd>
+    </dl>
+  </div>
+
+  <div class="profile-wrap" style="display: none">
+    <h3>PT</h3>
+    <dl class="casinopt-list-wrap">
+      <dt>PT Setting</dt>
+      <dd>
+        <a
+          href="#"
+          class="favor-set"
+          onclick="PlayerPTAllowedHandler.showDialog()"
+          >Edit</a
+        >
+      </dd>
+
+      <dd class="dl_list">
+        <img class="expand-arrow" src="assets/images/transparent.gif" />
+        <dl class="casinopt-list-head">
+          <dt></dt>
+
+          <dd>SUP</dd>
+
+          <dd>SUP (Actual)</dd>
+
+          <dd>MA (Actual)</dd>
+        </dl>
+
+        <dl class="casinopt-list">
+          <dt>Soccer</dt>
+
+          <dd id="profile_soccer_4_PT_setting">0%</dd>
+
+          <dd id="profile_soccer_4_PT">0%</dd>
+
+          <dd id="profile_soccer_3_PT">0%</dd>
+        </dl>
+
+        <dl class="casinopt-list">
+          <dt>Tennis</dt>
+
+          <dd id="profile_tennis_4_PT_setting">0%</dd>
+
+          <dd id="profile_tennis_4_PT">0%</dd>
+
+          <dd id="profile_tennis_3_PT">0%</dd>
+        </dl>
+
+        <dl class="casinopt-list">
+          <dt>Cricket</dt>
+
+          <dd id="profile_cricket_4_PT_setting">0%</dd>
+
+          <dd id="profile_cricket_4_PT">0%</dd>
+
+          <dd id="profile_cricket_3_PT">0%</dd>
+        </dl>
+
+        <dl class="casinopt-list">
+          <dt>Rugby Union</dt>
+
+          <dd id="profile_rugby_union_4_PT_setting">0%</dd>
+
+          <dd id="profile_rugby_union_4_PT">0%</dd>
+
+          <dd id="profile_rugby_union_3_PT">0%</dd>
+        </dl>
+
+        <dl class="casinopt-list">
+          <dt>Horse Racing</dt>
+
+          <dd id="profile_horse_racing_4_PT_setting">0%</dd>
+
+          <dd id="profile_horse_racing_4_PT">0%</dd>
+
+          <dd id="profile_horse_racing_3_PT">0%</dd>
+        </dl>
+
+        <dl class="casinopt-list">
+          <dt>Greyhound Racing</dt>
+
+          <dd id="profile_greyhound_racing_4_PT_setting">0%</dd>
+
+          <dd id="profile_greyhound_racing_4_PT">0%</dd>
+
+          <dd id="profile_greyhound_racing_3_PT">0%</dd>
+        </dl>
+
+        <dl class="casinopt-list">
+          <dt>American Football</dt>
+
+          <dd id="profile_american_football_4_PT_setting">0%</dd>
+
+          <dd id="profile_american_football_4_PT">0%</dd>
+
+          <dd id="profile_american_football_3_PT">0%</dd>
+        </dl>
+
+        <dl class="casinopt-list">
+          <dt>Basketball</dt>
+
+          <dd id="profile_basketball_4_PT_setting">0%</dd>
+
+          <dd id="profile_basketball_4_PT">0%</dd>
+
+          <dd id="profile_basketball_3_PT">0%</dd>
+        </dl>
+
+        <dl class="casinopt-list">
+          <dt>Politics</dt>
+
+          <dd id="profile_politics_4_PT_setting">0%</dd>
+
+          <dd id="profile_politics_4_PT">0%</dd>
+
+          <dd id="profile_politics_3_PT">0%</dd>
+        </dl>
+      </dd>
+
+      <div style="display: none">
+        <dt>Fancy Bet PT Setting</dt>
+        <dd></dd>
+        <dd class="dl_list">
+          <img class="expand-arrow" src="assets/images/transparent.gif" />
+          <dl>
+            <dt>Fancy Bet</dt>
+            <dd id="profile_company_fancy_bet_PT">0%</dd>
+          </dl>
+        </dd>
+      </div>
+
+      <div style="display: none">
+        <dt>Book Maker PT Setting</dt>
+        <dd></dd>
+        <dd class="dl_list">
+          <img class="expand-arrow" src="assets/images/transparent.gif" />
+          <dl>
+            <dt>Book Maker</dt>
+            <dd id="profile_company_book_maker_PT">0%</dd>
+          </dl>
+        </dd>
+      </div>
+
+      <div style="display: none">
+        <dt style="width: 200px">SportsBook PT Setting</dt>
+        <dd></dd>
+        <dd class="dl_list">
+          <img class="expand-arrow" src="assets/images/transparent.gif" />
+          <dl>
+            <dt>PT</dt>
+            <dd id="profile_is_allow_sportsbookTennis">ON</dd>
+
+            <dt>Sportsbook</dt>
+            <dd id="profile_company_sportsbook_tennis_PT">0%</dd>
+          </dl>
+        </dd>
+      </div>
+
+      <div style="display: none">
+        <dt style="width: 200px">SportsBook - Premium PT Setting</dt>
+        <dd></dd>
+        <dd class="dl_list">
+          <img class="expand-arrow" src="assets/images/transparent.gif" />
+          <dl>
+            <dt>Premium PT</dt>
+            <dd id="profile_is_allow_sportsbookPremiumCricket">ON</dd>
+
+            <dt>Premium</dt>
+            <dd id="profile_company_sportsbookPremiumCricket_PT">0%</dd>
+          </dl>
+        </dd>
+      </div>
+
+      <div style="display: none">
+        <dt>Binary PT Setting</dt>
+        <dd></dd>
+        <dd class="dl_list">
+          <img class="expand-arrow" src="assets/images/transparent.gif" />
+          <dl>
+            <dt>Binary</dt>
+            <dd id="profile_company_binary_PT">0%</dd>
+          </dl>
+        </dd>
+      </div>
+    </dl>
+  </div>
+</div>
+
+<app-modal [(open)]="changePassModalOpen">
+  <div class="modal-header">
+    <h3>Change Password</h3>
+  </div>
+  <div class="modal-content">
+    <dl class="form_list">
+      <dt>New Password</dt>
+      <dd>
+        <input
+          id="newPassword"
+          type="password"
+          placeholder="Enter"
+          aria-autocomplete="list"
+        />
+        <span class="must">＊</span>
+        <span id="newPasswordErrorText" class="error-text"></span>
+      </dd>
+      <dt>Confirm Password</dt>
+      <dd>
+        <input id="newPasswordConfirm" type="password" placeholder="Enter" />
+        <span class="must">＊</span>
+        <span id="newPasswordConfirmErrorText" class="error-text"></span>
+      </dd>
+      <dt>Your Password</dt>
+      <dd>
+        <input id="changePassword" type="password" placeholder="Enter" />
+        <span class="must">＊</span>
+      </dd>
+      <dd>
+        <a id="changePasswordBtn" href="javascript: void(0)" class="btn-send"
+          >Change</a
+        >
+      </dd>
+    </dl>
+  </div>
+</app-modal>
+
+<app-modal [(open)]="changeCommisionOpen">
+  <div class="modal-header">
+    <h3>Change Commission</h3>
+  </div>
+  <div class="modal-content">
+    <dl class="form_list">
+      <dt>Commission</dt>
+      <dd>
+        <input
+          id="newCommission"
+          type="text"
+          onclick="location.href='#stake'"
+          placeholder="Enter"
+        />%
+        <span class="must">＊</span>
+      </dd>
+      <dt>Password</dt>
+      <dd>
+        <input
+          id="changeCommissionPassword"
+          type="password"
+          onclick="location.href='#stake'"
+          placeholder="Enter"
+        />
+        <span class="must">＊</span>
+      </dd>
+      <dd>
+        <a id="changeCommissionBtn" href="javascript: void(0)" class="btn-send"
+          >Change</a
+        >
+      </dd>
+    </dl>
+  </div>
+</app-modal>

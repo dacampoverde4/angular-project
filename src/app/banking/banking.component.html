@@ -1,0 +1,188 @@
+<div class="full-wrap">
+  <form [formGroup]="transferForm" (ngSubmit)="transfer()">
+    <h2>Banking</h2>
+
+    <!-- Report Table -->
+    <div class="over-wrap" style="max-height: calc(100% - 108px)">
+      <div class="function-wrap clearfix">
+        <dl class="banking-head float-L">
+          <dt>Your Balance</dt>
+          <dd id="yourBalance"><span>PTH</span>{{ currentUser.balance }}</dd>
+        </dl>
+        <ul class="input-list float-R" style="display: none">
+          <li><label>Sort by</label></li>
+          <li>
+            <select id="sort">
+              <option value="userId">UID</option>
+              <option value="site">Site</option>
+              <option value="currencyType">Currency</option>
+            </select>
+          </li>
+        </ul>
+      </div>
+      <table id="table_transfer" class="table01 tab-transfer tab-banking">
+        <tbody>
+          <tr>
+            <th id="userIdTH" width="" class="align-L sort-this">UID</th>
+            <th id="siteTH" width="5%" style="display: none">Site</th>
+            <th id="currencyTypeTH" width="5%" style="display: none">
+              Currency
+            </th>
+            <th width="9%">Balance</th>
+            <th width="7.5%">Available D/W</th>
+            <th width="9%">Exposure</th>
+            <th width="230" class="align-C border-l">Deposit / Withdraw</th>
+            <th width="180" class="border-l">Credit Reference</th>
+            <th width="8%" class="">Reference P/L</th>
+            <th width="8%" class="border-l">Remark</th>
+            <th width="47" class="full-amount">
+              <a id="allLog" href="javascript:void(0);" class="btn-send"
+                >All Log</a
+              >
+            </th>
+          </tr>
+        </tbody>
+        <tbody id="content">
+          <tr
+            formArrayName="users"
+            id="{{ user.userName }}"
+            *ngFor="let user of usersList; let i = index; trackBy: trackById"
+          >
+            <ng-container [formGroupName]="i">
+              <td class="td-uid">
+                <span class="order">{{ i + 1 }} .</span>{{ user.userName }}
+              </td>
+              <td id="siteCol" style="display: none">Sky</td>
+              <td id="currencyTypeCol" style="display: none">PTH</td>
+              <td id="balance">{{ user.balance | number: "0.2" }}</td>
+              <td id="availableBalance">{{ user.balance }}</td>
+              <td id="userExposure">0.00</td>
+              <td class="DW-amount">
+                <input
+                  style="display: none"
+                  type="radio"
+                  formControlName="txnType"
+                  value="1"
+                  #txnType
+                  [(ngModel)]="user.selectDW"
+                />
+                <input
+                  style="display: none"
+                  type="radio"
+                  formControlName="txnType"
+                  value="2"
+                  [(ngModel)]="user.selectDW"
+                />
+                <ul
+                  class="btn_list-DW"
+                  [ngClass]="{
+                    'select-D': user.selectDW === 1,
+                    'select-W': user.selectDW === 2
+                  }"
+                >
+                  <li>
+                    <a id="dBtn" class="btn" (click)="selectTxType(user, 1)"
+                      >D</a
+                    >
+                  </li>
+                  <li>
+                    <a id="wBtn" class="btn" (click)="selectTxType(user, 2)"
+                      >W</a
+                    >
+                  </li>
+                </ul>
+                <input
+                  name="amount"
+                  formControlName="amount"
+                  class=""
+                  type="text"
+                  placeholder="0"
+                  maxlength="18"
+                  #amount
+                />
+                <a
+                  id="fullBtn"
+                  (click)="amount.value = currentUser.balance"
+                  class="btn float-L"
+                  >Full</a
+                >
+              </td>
+              <td class="credit-amount">
+                <a
+                  id="userCreditReference"
+                  [style.display]="user.editCreditRef ? 'none' : 'inline-flex'"
+                >
+                  {{user.creditRef | number: '0.2'}}</a
+                >
+                <input
+                  name="editCreditReference"
+                  class=""
+                  type="text"
+                  formControlName="creditRef"
+                  placeholder="0"
+                  maxlength="18"
+                  [style.display]="user.editCreditRef ? 'inline-flex' : 'none'"
+                />
+                <a
+                  (click)="editCreditRef(user)"
+                  class="btn"
+                  [style.display]="user.editCreditRef ? 'none' : 'inline-flex'"
+                  >Edit</a
+                >
+                <a
+                  (click)="cancelEditCreditRef(user)"
+                  class="btn"
+                  [style.display]="user.editCreditRef ? 'inline-flex' : 'none'"
+                  >Cancel</a
+                >
+              </td>
+              <td id="userReferencePL">0.00</td>
+              <td class="border-l">
+                <input
+                  formControlName="remark"
+                  class=""
+                  type="text"
+                  placeholder="Remark"
+                />
+              </td>
+              <td class="full-amount">
+                <a id="log" class="btn">Log</a>
+              </td>
+            </ng-container>
+          </tr>
+          <tr id="totalTempTr" class="total">
+            <td class="align-L">Total</td>
+            <td id="totalSite" style="display: none"></td>
+            <td id="totalCurrencyType" style="display: none"></td>
+            <td id="totalBalance">0.00</td>
+            <td id="totalAvailableBalance">0.00</td>
+            <td id="totalExposure">0.00</td>
+            <td id="totalCreditReference" class="" colspan="2">0.00</td>
+            <td id="totalReferencePL">0.00</td>
+            <td></td>
+            <td></td>
+          </tr>
+        </tbody>
+      </table>
+    </div>
+
+    <div class="submit-wrap" id="settlementBar">
+      <ul>
+        <li>
+          <a id="clearAllBtn" (click)="cancelAll()" class="btn">Clear All</a>
+        </li>
+        <li class="submit-payment">
+          <input
+            formControlName="password"
+            id="paymentPassword"
+            type="password"
+            placeholder="Password"
+          />
+          <button id="submit" class="btn-send">
+            Submit <span id="submitCount">{{validRow}} </span> Payment
+          </button>
+        </li>
+      </ul>
+    </div>
+  </form>
+</div>

@@ -1,0 +1,80 @@
+<h2>Transaction&nbsp;History</h2>
+<table id="table_log" class="table01">
+  <tbody>
+    <tr>
+      <th width="15%" class="align-L">Date/Time</th>
+      <th width="18%">Deposit</th>
+      <th width="18%">Withdraw</th>
+      <th width="18%">Balance</th>
+      <th width="16%">Remark</th>
+      <th width="">From/To</th>
+    </tr>
+  </tbody>
+  <tbody id="content">
+    <tr id="tempTr">
+      <td id="createDate" class="align-L">2020-10-06 23:41:24</td>
+      <td id="deposit">60.00</td>
+      <td id="withdraw">-</td>
+      <td id="balance">70.00</td>
+      <td id="remark"></td>
+      <td>
+        <span id="from">Master Agent</span>
+        <img class="fromto" src="assets/images/transparent.gif" />
+        <span id="to">prabhu007</span>
+      </td>
+    </tr>
+    <tr id="tempTr">
+      <td id="createDate" class="align-L">2020-10-06 23:27:10</td>
+      <td id="deposit">10.00</td>
+      <td id="withdraw">-</td>
+      <td id="balance">10.00</td>
+      <td id="remark"></td>
+      <td>
+        <span id="from">Master Agent</span>
+        <img class="fromto" src="assets/images/transparent.gif" />
+        <span id="to">prabhu007</span>
+      </td>
+    </tr>
+  </tbody>
+</table>
+
+
+<pagination-template #pagination="paginationApi">
+  <ul id="pageNumberContent" class="pages">
+    <li id="prev">
+      <a
+        href="javascript:void(0);"
+        class="disable"
+        (click)="pagination.previous()"
+        >Prev</a
+      >
+    </li>
+    <li id="pageNumber">
+      <ng-template *ngFor="let page of pagination.pages">
+        <!-- <a
+          (click)="pagination.setCurrent(page.value)"
+          *ngIf="pagination.getCurrent() != page.value"
+          style="pointer-events: none"
+          >{{ page.value }}
+        </a> -->
+        <!-- <a
+          *ngIf="pagination.getCurrent() == page.value"
+          class="select"
+          style="pointer-events: none"
+          >{{ page.value }}
+        </a> -->
+      </ng-template>
+
+      <a class="select" style="pointer-events: none">1 </a>
+    </li>
+    <!-- <li id="pageNumber"><a href="javascript:void(0);">2</a></li> -->
+    <li id="next">
+      <a
+        href="javascript:void(0);"
+        [class.disabled]="pagination.isLastPage()"
+        (click)="pagination.next()"
+        >Next</a
+      >
+    </li>
+  </ul>
+</pagination-template>

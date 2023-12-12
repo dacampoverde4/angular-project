@@ -1,0 +1,418 @@
+<div class="main_wrap">
+  <h2>Profit/Loss Report by Market</h2>
+
+  <!-- function -->
+
+  <div class="function-wrap">
+    <ul class="input-list">
+      <div id="statusCondition" style="display: none">
+        <li><label>Bet Status:</label></li>
+        <li>
+          <select name="betStatus" id="betStatus"></select>
+        </li>
+      </div>
+
+      <li><label>Sports</label></li>
+      <li>
+        <select id="func_sports">
+          <option value="-1" selected="selected">All</option>
+
+          <option value="1">SOCCER</option>
+
+          <!-- <option value="1" data-eventreporttype="1">SOCCER_BOOK</option> -->
+
+          <option value="2">TENNIS</option>
+
+          <option value="4">CRICKET</option>
+
+          <!-- <option value="4" data-eventreporttype="1">CRICKET_BOOK</option>
+
+          <option value="5">RUGBY_UNION</option>
+
+          <option value="7">HORSE_RACING</option>
+
+          <option value="4339">GREYHOUND_RACING</option>
+
+          <option value="6423">AMERICAN_FOOTBALL</option>
+
+          <option value="7522">BASKETBALL</option>
+
+          <option value="2378962">ELECTION</option>
+
+          <option value="9999999">FANCYBET</option>
+
+          <option value="2378961">POLITICS</option>
+
+          <option value="-99">CASINO</option>
+
+          <option value="-97">BPOKER</option>
+
+          <option value="-100" data-eventreporttype="4">BINARY</option> -->
+        </select>
+      </li>
+
+      <li></li>
+
+      <li><label>Period</label></li>
+      <li>
+        <input
+          id="startDate"
+          class="cal-input"
+          type="text"
+          placeholder="YYYY-MM-DD"
+          [(ngModel)]="fromDate"
+          [dpDayPicker]="dateConfig"
+          [theme]="'dp-material'"
+          [mode]="'day'"
+          autocomplete="off"
+        />
+        <input
+          id="startTime"
+          disabled=""
+          class="time-input disable"
+          type="text"
+          placeholder="09:00"
+          maxlength="5"
+        />
+        to
+        <input
+          id="endDate"
+          class="cal-input"
+          type="text"
+          placeholder="YYYY-MM-DD"
+          [(ngModel)]="toDate"
+          [dpDayPicker]="dateConfig"
+          [theme]="'dp-material'"
+          [mode]="'day'"
+          autocomplete="off"
+        />
+        <input
+          id="endTime"
+          disabled=""
+          class="time-input disable"
+          type="text"
+          placeholder="08:59"
+          maxlength="5"
+        />
+      </li>
+      <li style="display: none">(TimeZone:IST)</li>
+    </ul>
+
+    <ul class="input-list">
+      <li><a id="today" href="#" class="btn">Just For Today</a></li>
+      <li style="display: none">
+        <a id="yesterday" href="#" class="btn">From Yesterday</a>
+      </li>
+      <li style="display: none">
+        <a id="last7days" href="#" class="btn">Last 7 days</a>
+      </li>
+      <li style="display: none">
+        <a id="last30days" href="#" class="btn">Last 30 days</a>
+      </li>
+      <li style="display: none">
+        <a id="last2months" href="#" class="btn">Last 2 Months</a>
+      </li>
+      <li style="display: none">
+        <a id="last3months" href="#" class="btn">Last 3 Months</a>
+      </li>
+      <li><a id="getPL" href="#" class="btn-send">Get P &amp; L</a></li>
+    </ul>
+  </div>
+  <!-- No Report Message -->
+  <div id="noReportMessage"></div>
+  <!-- function end-->
+
+  <!-- Loading Wrap -->
+  <div id="loading" class="loading-wrap" style="display: none">
+    <ul class="loading">
+      <li><img src="/images/loading40.gif" /></li>
+      <li>Loading...</li>
+    </ul>
+  </div>
+
+  <!-- Message -->
+  <div id="message" class="message-wrap success">
+    <a class="btn-close">Close</a>
+    <p></p>
+  </div>
+  <!-- Report Table -->
+  <table style="display: none">
+    <tbody>
+      <tr id="tempTr">
+        <td class="align-L">
+          <a id="_byMarket" href="javascript:void(0);" class="expand-close"></a>
+          <a href="javascript:void(0);"
+            ><span id="_eventType"></span>
+            <img class="fromto" src="assets/images/transparent.gif" />
+            <strong id="_eventName"></strong
+          ></a>
+        </td>
+        <td id="_stake"></td>
+        <td id="_profitLoss"></td>
+        <td id="_profitLossDownLine"></td>
+
+        <td id="_tax3"></td>
+        <td id="_rebate3"></td>
+        <td id="_tax2"></td>
+        <td id="_rebate2"></td>
+        <td id="_payout1"></td>
+        <td id="_tax1"></td>
+        <td id="_rebate1"></td>
+        <td id="_profitLoss1"></td>
+        <td id="_profitLossUpLine"></td>
+      </tr>
+
+      <tr id="subTempTr" class="expand">
+        <td id="market_type" class="expand-event"></td>
+        <td id="market_stake"></td>
+        <td id="market_profitLoss"></td>
+        <td id="market_profitLossDownLine"></td>
+
+        <td id="market_tax3"></td>
+        <td id="market_rebate3"></td>
+        <td id="market_tax2"></td>
+        <td id="market_rebate2"></td>
+        <td id="market_payout1"></td>
+        <td id="market_tax1"></td>
+        <td id="market_rebate1"></td>
+        <td id="market_profitLoss1"></td>
+        <td id="market_profitLossUpLine"></td>
+      </tr>
+
+      <tr id="tempTotalTr" class="total">
+        <td class="align-L">Total</td>
+        <td id="_totalStake"></td>
+        <td id="_totalProfitLoss"></td>
+        <td id="_totalProfitLossDownLine"></td>
+
+        <td id="_totalTax3"></td>
+        <td id="_totalRebate3"></td>
+        <td id="_totalTax2"></td>
+        <td id="_totalRebate2"></td>
+        <td id="_totalPayout1"></td>
+        <td id="_totalTax1"></td>
+        <td id="_totalRebate1"></td>
+        <td id="_totalProfitLoss1"></td>
+        <td id="_totalProfitLossUpLine"></td>
+      </tr>
+    </tbody>
+  </table>
+
+  <div class="total_all">
+    <div class="spacer"></div>
+    <div class="download-reports">
+      <button class="excel btn" title="Export Excel">
+        <img src="assets/images/transparent.gif" alt="" />
+      </button>
+      <button class="pdf btn" title="Export Pdf">
+        <img src="assets/images/transparent.gif" alt="" />
+      </button>
+      <button class="csv btn" title="Export Csv">
+        <img src="assets/images/transparent.gif" alt="" />
+      </button>
+    </div>
+  </div>
+
+  <!-- Report Table -->
+  <div
+    id="reportDiv"
+    class="over-wrap"
+    style="max-height: calc(100% - 32px - 93px)"
+  >
+    <table id="table_DL" class="table01 table-pt" style="">
+      <tbody>
+        <tr id="head">
+          <th id="header_eventName" width="" class="align-L">UID</th>
+          <th width="15%" class="">Stake</th>
+          <th width="15%" class="">Player P/L</th>
+          <th id="header_profitLoss_downLine" width="15%" class="">
+            Downline P/L
+          </th>
+
+          <th
+            id="header_tax_agent_3"
+            width="15%"
+            class=""
+            style="display: none"
+          >
+            Master Comm.
+          </th>
+          <th
+            id="header_rebate_agent_3"
+            width="15%"
+            class=""
+            style="display: none"
+          >
+            Master Rebate
+          </th>
+          <th id="header_tax_agent_2" width="15%" class="">Super Comm.</th>
+          <th
+            id="header_rebate_agent_2"
+            width="15%"
+            class=""
+            style="display: none"
+          >
+            Super Rebate
+          </th>
+          <th
+            id="header_payout_agent_1"
+            width="15%"
+            class=""
+            style="display: none"
+          >
+            SS PT
+          </th>
+          <th
+            id="header_tax_agent_1"
+            width="15%"
+            class=""
+            style="display: none"
+          >
+            SS Comm.
+          </th>
+          <th
+            id="header_rebate_agent_1"
+            width="15%"
+            class=""
+            style="display: none"
+          >
+            SS Rebate
+          </th>
+          <th
+            id="header_profitLoss_agent_1"
+            width="15%"
+            class=""
+            style="display: none"
+          >
+            SS Total
+          </th>
+          <th width="15%" class="">Upline P/L</th>
+        </tr>
+      </tbody>
+      <tbody id="content">
+        <tr id="main_30043096_0">
+          <td class="align-L">
+            <a
+              id="_byMarket"
+              href="javascript:void(0);"
+              class="expand-open"
+            ></a>
+            <a href="javascript:void(0);"
+              ><span id="_eventType">Cricket</span>
+              <img class="fromto" src="assets/images/transparent.gif" />
+              <strong id="_eventName"
+                >Sunrisers Hyderabad v Kings XI Punjab</strong
+              ></a
+            >
+          </td>
+          <td id="_stake">40.00</td>
+          <td id="_profitLoss"><span class="red">( 7.28)</span></td>
+          <td id="_profitLossDownLine"><span class="red">( 7.28)</span></td>
+
+          <td id="_tax3" style="display: none">0.00</td>
+          <td id="_rebate3" style="display: none">0.00</td>
+          <td id="_tax2">0.00</td>
+          <td id="_rebate2" style="display: none">0.00</td>
+          <td id="_payout1" style="display: none">0.00</td>
+          <td id="_tax1" style="display: none">0.00</td>
+          <td id="_rebate1" style="display: none">0.00</td>
+          <td id="_profitLoss1" style="display: none">0.00</td>
+          <td id="_profitLossUpLine">7.28</td>
+        </tr>
+        <tr id="sub_30043096_0" class="expand first">
+          <td id="market_type" class="expand-event">Match Odds</td>
+          <td id="market_stake">10.00</td>
+          <td id="market_profitLoss">3.72</td>
+          <td id="market_profitLossDownLine">3.72</td>
+
+          <td id="market_tax3" style="display: none">0.00</td>
+          <td id="market_rebate3" style="display: none">0.00</td>
+          <td id="market_tax2">0.00</td>
+          <td id="market_rebate2" style="display: none">0.00</td>
+          <td id="market_payout1" style="display: none">0.00</td>
+          <td id="market_tax1" style="display: none">0.00</td>
+          <td id="market_rebate1" style="display: none">0.00</td>
+          <td id="market_profitLoss1" style="display: none">0.00</td>
+          <td id="market_profitLossUpLine"><span class="red">( 3.72)</span></td>
+        </tr>
+        <tr id="sub_30043096_0" class="expand last">
+          <td id="market_type" class="expand-event">FANCY_BET</td>
+          <td id="market_stake">30.00</td>
+          <td id="market_profitLoss"><span class="red">( 11.00)</span></td>
+          <td id="market_profitLossDownLine">
+            <span class="red">( 11.00)</span>
+          </td>
+
+          <td id="market_tax3" style="display: none">0.00</td>
+          <td id="market_rebate3" style="display: none">0.00</td>
+          <td id="market_tax2">0.00</td>
+          <td id="market_rebate2" style="display: none">0.00</td>
+          <td id="market_payout1" style="display: none">0.00</td>
+          <td id="market_tax1" style="display: none">0.00</td>
+          <td id="market_rebate1" style="display: none">0.00</td>
+          <td id="market_profitLoss1" style="display: none">0.00</td>
+          <td id="market_profitLossUpLine">11.00</td>
+        </tr>
+        <tr id="tempTotalTr" class="total">
+          <td class="align-L">Total</td>
+          <td id="_totalStake">40.00</td>
+          <td id="_totalProfitLoss"><span class="red">( 7.28)</span></td>
+          <td id="_totalProfitLossDownLine">
+            <span class="red">( 7.28)</span>
+          </td>
+
+          <td id="_totalTax3" style="display: none">0.00</td>
+          <td id="_totalRebate3" style="display: none">0.00</td>
+          <td id="_totalTax2">0.00</td>
+          <td id="_totalRebate2" style="display: none">0.00</td>
+          <td id="_totalPayout1" style="display: none">0.00</td>
+          <td id="_totalTax1" style="display: none">0.00</td>
+          <td id="_totalRebate1" style="display: none">0.00</td>
+          <td id="_totalProfitLoss1" style="display: none">0.00</td>
+          <td id="_totalProfitLossUpLine">7.28</td>
+        </tr>
+      </tbody>
+    </table>
+  </div>
+</div>
+
+
+<pagination-template #pagination="paginationApi">
+  <ul id="pageNumberContent" class="pages">
+    <li id="prev">
+      <a
+        href="javascript:void(0);"
+        class="disable"
+        (click)="pagination.previous()"
+        >Prev</a
+      >
+    </li>
+    <li id="pageNumber">
+      <ng-template *ngFor="let page of pagination.pages">
+        <!-- <a
+          (click)="pagination.setCurrent(page.value)"
+          *ngIf="pagination.getCurrent() != page.value"
+          style="pointer-events: none"
+          >{{ page.value }}
+        </a> -->
+        <!-- <a
+          *ngIf="pagination.getCurrent() == page.value"
+          class="select"
+          style="pointer-events: none"
+          >{{ page.value }}
+        </a> -->
+      </ng-template>
+
+      <a class="select" style="pointer-events: none">1 </a>
+    </li>
+    <!-- <li id="pageNumber"><a href="javascript:void(0);">2</a></li> -->
+    <li id="next">
+      <a
+        href="javascript:void(0);"
+        [class.disabled]="pagination.isLastPage()"
+        (click)="pagination.next()"
+        >Next</a
+      >
+    </li>
+  </ul>
+</pagination-template>

@@ -1,0 +1,107 @@
+<div class="main_wrap">
+  <h2>Ticker</h2>
+  <div class="function-wrap">
+    <div>
+      <button class="btn">Delete</button>
+      <span class="spacer"></span>
+      <a (click)="openAddNewModal()" class="btn-send">Add New</a>
+    </div>
+
+    <div>
+      <span class="spacer"></span>
+      <p class="vertical-align: middle">Total Records: 4</p>
+    </div>
+  </div>
+  <div class="total_all">
+    <div class="spacer"></div>
+    <div class="download-reports">
+      <button class="excel btn" title="Export Excel">
+        <img src="assets/images/transparent.gif" alt="" />
+      </button>
+      <button class="pdf btn" title="Export Pdf">
+        <img src="assets/images/transparent.gif" alt="" />
+      </button>
+      <button class="csv btn" title="Export Csv">
+        <img src="assets/images/transparent.gif" alt="" />
+      </button>
+    </div>
+  </div>
+  <div class="table-container">
+    <table class="table01">
+      <thead>
+        <tr class="ng-table-sort-header">
+          <th width="3%">
+            <div ng-if="template" ng-include="template">
+              <input
+                type="checkbox"
+                id="select_all"
+                name="filter-checkbox"
+                value=""
+              />
+            </div>
+          </th>
+          <th width="3%">Edit</th>
+          <th width="10%" class="align-C">ID</th>
+          <th class="align-C">Title</th>
+          <th width="8%" class="align-C">IsActive</th>
+        </tr>
+      </thead>
+
+      <tbody>
+        <tr *ngFor="let l of [1, 1]">
+          <td>
+            <input
+              type="checkbox"
+              value="1"
+              data-ng-class="checkAll"
+              aria-label="checkbox"
+              class="ng-pristine ng-untouched ng-valid ng-empty"
+            />
+          </td>
+
+          <td title=" 'Edit' ">
+            <a (click)="openAddNewModal()">
+              <i class="fa fa-pencil-square-o fa-2x"></i>
+            </a>
+          </td>
+
+          <td title=" 'ID' " class="align-C">1</td>
+
+          <td title=" 'Ticker Name' " class="align-C">
+            Welcome to Skysports365
+          </td>
+
+          <td width="8%" title=" 'IsActive' " class="align-C">
+            <a *ngIf="true">
+              <i class="fa fa-check-circle fa-2x" style="color: green"></i>
+            </a>
+          </td>
+        </tr>
+      </tbody>
+    </table>
+  </div>
+</div>
+
+<app-modal [(open)]="isAddNewModalOpen">
+  <div class="modal-header">
+    <h3>Add New Ticker</h3>
+  </div>
+  <div class="modal-content">
+    <div class="ticker-details">
+      <div class="input-group">
+        <label for="title">Title: </label>
+        <input type="text" [(ngModel)]="newTickerTitle">
+      </div>
+      <div class="container">
+        <label for="isActive">
+          <input type="checkbox" name="isActive" id="isActive"> Is Active
+        </label>
+      </div>
+    </div>
+  </div>
+  <div class="modal-footer">
+    <div class="btn_box">
+      <button class="btn-send" (click)="addTicker()">Add New</button>
+    </div>
+  </div>
+</app-modal>

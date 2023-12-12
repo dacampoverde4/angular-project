@@ -1,0 +1,143 @@
+<h2>Account Statement</h2>
+<table id="table_log" class="table01">
+  <tbody>
+    <tr>
+      <th width="15%" class="align-L">Date/Time</th>
+      <th width="18%">Deposit</th>
+      <th width="18%">Withdraw</th>
+      <th width="18%">Balance</th>
+      <th width="16%">Remark</th>
+      <th width="">From/To</th>
+    </tr>
+  </tbody>
+  <tbody id="content">
+    <tr id="tempTr">
+      <td id="createDate" class="align-L">2020-10-07 00:09:34</td>
+      <td id="deposit">-</td>
+      <td id="withdraw"><span class="red">( 10.00)</span></td>
+      <td id="balance">10.00</td>
+      <td id="remark"></td>
+      <td>
+        <span id="from">demost</span>
+        <img class="fromto" src="assets/images/transparent.gif" />
+        <span id="to">john00001</span>
+      </td>
+    </tr>
+    <tr id="tempTr">
+      <td id="createDate" class="align-L">2020-10-06 23:39:44</td>
+      <td id="deposit">50.00</td>
+      <td id="withdraw">-</td>
+      <td id="balance">60.00</td>
+      <td id="remark"></td>
+      <td>
+        <span id="from">demost</span>
+        <img class="fromto" src="assets/images/transparent.gif" />
+        <span id="to">toxiy</span>
+      </td>
+    </tr>
+    <tr id="tempTr">
+      <td id="createDate" class="align-L">2020-10-06 23:15:14</td>
+      <td id="deposit">20.00</td>
+      <td id="withdraw">-</td>
+      <td id="balance">20.00</td>
+      <td id="remark"></td>
+      <td>
+        <span id="from">demost</span>
+        <img class="fromto" src="assets/images/transparent.gif" />
+        <span id="to">toxiy</span>
+      </td>
+    </tr>
+    <tr id="tempTr">
+      <td id="createDate" class="align-L">2020-10-06 22:44:32</td>
+      <td id="deposit">10.00</td>
+      <td id="withdraw">-</td>
+      <td id="balance">20.00</td>
+      <td id="remark"></td>
+      <td>
+        <span id="from">demost</span>
+        <img class="fromto" src="assets/images/transparent.gif" />
+        <span id="to">john00001</span>
+      </td>
+    </tr>
+    <tr id="tempTr">
+      <td id="createDate" class="align-L">2020-10-06 22:41:58</td>
+      <td id="deposit">10.00</td>
+      <td id="withdraw">-</td>
+      <td id="balance">10.00</td>
+      <td id="remark"></td>
+      <td>
+        <span id="from">demost</span>
+        <img class="fromto" src="assets/images/transparent.gif" />
+        <span id="to">john00001</span>
+      </td>
+    </tr>
+    <tr id="tempTr">
+      <td id="createDate" class="align-L">2020-09-26 16:23:27</td>
+      <td id="deposit">100.00</td>
+      <td id="withdraw">-</td>
+      <td id="balance">100.00</td>
+      <td id="remark"></td>
+      <td>
+        <span id="from">Senior Super</span>
+        <img class="fromto" src="assets/images/transparent.gif" />
+        <span id="to">demost</span>
+      </td>
+    </tr>
+  </tbody>
+</table>
+<div>
+  <ul style="display: none">
+    <li id="prev"><a href="javascript:void(0);">Prev</a></li>
+    <li id="next"><a href="javascript:void(0);">Next</a></li>
+    <li id="pageNumber"><a href="javascript:void(0);"></a></li>
+    <li id="more"><a href="javascript:void(0);">...</a></li>
+    <input
+      type="text"
+      id="goToPageNumber"
+      onkeyup="return PageHandler.validatePageNumber(this)"
+      maxlength="6"
+      size="4"
+    />
+    <li><a id="goPageBtn">GO</a></li>
+  </ul>
+
+  <pagination-template #pagination="paginationApi">
+    <ul id="pageNumberContent" class="pages">
+      <li id="prev">
+        <a
+          href="javascript:void(0);"
+          class="disable"
+          (click)="pagination.previous()"
+          >Prev</a
+        >
+      </li>
+      <li id="pageNumber">
+        <ng-template *ngFor="let page of pagination.pages">
+          <!-- <a
+            (click)="pagination.setCurrent(page.value)"
+            *ngIf="pagination.getCurrent() != page.value"
+            style="pointer-events: none"
+            >{{ page.value }}
+          </a> -->
+          <!-- <a
+            *ngIf="pagination.getCurrent() == page.value"
+            class="select"
+            style="pointer-events: none"
+            >{{ page.value }}
+          </a> -->
+        </ng-template>
+
+        <a class="select" style="pointer-events: none">1 </a>
+      </li>
+      <!-- <li id="pageNumber"><a href="javascript:void(0);">2</a></li> -->
+      <li id="next">
+        <a
+          href="javascript:void(0);"
+          [class.disabled]="pagination.isLastPage()"
+          (click)="pagination.next()"
+          >Next</a
+        >
+      </li>
+    </ul>
+  </pagination-template>
+</div>

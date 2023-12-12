@@ -1,0 +1,91 @@
+@import "src/assets/scss/tables";
+@import "src/vars";
+
+.middle-pane {
+  display: flex;
+  justify-content: space-evenly;
+
+  .table-container {
+    flex: 1;
+
+    td {
+      padding: 0.3rem;
+    }
+  }
+}
+
+.backheader {
+  background-color: lighten($color: $back, $amount: 10%) !important;
+}
+
+.layheader {
+  background-color: $lay !important;
+}
+
+.odd {
+  width: 10%;
+}
+
+table {
+  &.match-0dds,
+  &.fancy {
+    td {
+      padding: 0.3rem;
+    }
+  }
+}
+
+.sessionbetbox a,
+.liabilitybox {
+  display: flex;
+  justify-content: center;
+  text-decoration: none;
+
+  color: #1e1e1e;
+
+  & > * {
+    margin-right: 8px;
+  }
+}
+
+.liabilitybox {
+  & > div {
+    flex: 1;
+  }
+  & > div {
+    display: inline-flex;
+    justify-content: flex-end;
+    align-items: center;
+  }
+}
+
+.table-container {
+  height: 100%;
+  overflow-y: auto;
+}
+
+::ng-deep {
+  .btn_box {
+    margin-top: 8px;
+  }
+
+  .white-wrap input[type="text"] {
+    background-color: #eee;
+  }
+}
+
+.switch1 {
+  position: relative;
+}
+
+.btn_box .btn {
+  margin-right: 8px;
+}
+
+.backlay {
+  margin-right: 8px;
+}
+
+.total_all {
+  align-items: center;
+}

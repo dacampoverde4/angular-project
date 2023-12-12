@@ -1,0 +1,97 @@
+<div class="main_wrap">
+  <ul class="report-tab-wrap" style="display: block">
+    <li
+      class="report-tab select"
+      id="reportType_sportsBook"
+      [class.select]="selectedTabIndex === 0"
+      (click)="selectTab(0)"
+    >
+      Casino List
+    </li>
+  </ul>
+  <div class="function-wrap" *ngIf="currentUser.userType === 1">
+    <ul class="input-list">
+      <li>
+        <label>User List:</label>
+        <select name="sortCondition" id="sortCondition" [(ngModel)]="selectedUser">
+          <option value="" selected="selected">Select User List</option>
+          <option value="{{ users.userId }}" *ngFor="let users of usersList">{{ users.userName }}</option>
+        </select>
+      </li>
+      <li>&nbsp;&nbsp;</li>
+      <li class="import-button">
+        <button class="btn-send" (click)="onActiveCasino()">Import</button>
+      </li>
+    </ul>
+  </div>
+</div>
+<div class="main_wrap">
+  <table
+    *ngIf="selectedTabIndex === 0"
+    id="table_DL"
+    class="table01 table-pt"
+    style=""
+  >
+    <thead>
+      <tr class="ng-table-sort-header">
+        <th width="3%">
+          <div ng-if="template" ng-include="template">
+            <input
+              type="checkbox"
+              id="select_all"
+              name="filter-checkbox"
+              value=""
+            />
+          </div>
+        </th>
+        <th>Table Name</th>
+      </tr>
+    </thead>
+
+    <tbody *ngIf="currentUser.userType === 1">
+      <tr *ngFor="let teenpatti of teenpattiLists | keyvalue">
+        <td>
+          <input
+            type="checkbox"
+            value="1"
+            data-ng-class="checkAll"
+            [(ngModel)]="teenpattiLists[teenpatti.key]"
+            aria-label="checkbox"
+            class="ng-pristine ng-untouched ng-valid ng-empty"
+          />
+        </td>
+
+        <td
+          title=" 'Status' "
+          data-sortable=" 'status' "
+          data-title-text="Status"
+        >
+          {{ teenpatti.key }}
+        </td>
+      </tr>
+    </tbody>
+
+    <tbody *ngIf="currentUser.userType === 2" style="background-color: ">
+      <tr *ngFor="let teenpatti of activeTeenpattis | keyvalue">
+        <td>
+          <input
+            type="checkbox"
+            value="1"
+            data-ng-class="checkAll"
+            aria-label="checkbox"
+            class="ng-pristine ng-untouched ng-valid ng-empty"
+          />
+        </td>
+
+        <td
+          title=" 'Status' "
+          data-sortable=" 'status' "
+          data-title-text="Status"
+        >
+          {{ teenpatti.value }}
+        </td>
+      </tr>
+    </tbody>
+  </table>
+</div>
+
